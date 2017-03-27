@@ -1,3 +1,5 @@
 dist
+tests/**.js
+tests/**.map
 node_modules
 npm-debug.log

@@ -1,32 +1,142 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as requireDir from 'require-dir';
 import * as ts from 'typescript';
+import * as requireDir from 'require-dir';
+import requireGlob = require('require-glob');
+import { TranspilerOutput, Visitor, transpile as tspoonTranspile } from '@brad-jones/tspoon';
 
-import { TranspilerOutput, Visitor, transpile as tspoonTranspile } from 'tspoon';
-
-export function transpile(filePath: string, configName?: string): TranspilerOutput
+/**
+ * Discovers Tspoon Visitor Modules from NPM Packages.
+ *
+ * A Tspoon Visitor Module, is simply a javascript module that provides 2
+ * functions. A filter function that you guessed it, filters ast nodes before
+ * handing off to a visit function that then performs transpilations.
+ *
+ * > NOTE: Visitor modules are expected to provide a single "default" export.
+ *
+ * Visitors are found by first looking for a "package.json" file in the provided
+ * basePath, if that file defines a `tsos.visitors` array of glob patterns, each
+ * glob pattern is passed to `requireGlob`, the resulting exports are added to
+ * the visitors array.
+ *
+ * We then recurse into "node_modules" and repeat.
+ *
+ * @param  {string} basePath Where to start looking for modules.
+ *
+ * @return Visitor[] An array of visitors.
+ */
+export function discoverVisitorsFromNpmPackages(basePath: string): Visitor[]
 {
-    // TODO: This all needs to be cached.
-    let tsConfigFileName = fs.realpathSync(ts.findConfigFile(path.dirname(filePath), ts.sys.fileExists, configName));
-    let tsConfigParsedJson = ts.parseConfigFileTextToJson(tsConfigFileName, ts.sys.readFile(tsConfigFileName)).config;
-    let tsConfig = ts.parseJsonConfigFileContent(tsConfigParsedJson, ts.sys, path.dirname(tsConfigFileName), null, tsConfigFileName);
-    tsConfig.options.declaration = false;
-
-    // TODO: This needs to be fleshed out further to use "glob" pattens.
-    // It also needs some sort of "node module resolution" logic written.
-    // And cached as well.
     let visitorsArray: Visitor[] = [];
-    if (typeof tsConfig.raw.tsos !== 'undefined' && typeof tsConfig.raw.tsos.visitors !== 'undefined')
+
+    let pkg;
+    try { pkg = require(path.join(basePath, 'package.json')); }
+    catch (e) { /* siliently fail and move on */ }
+
+    if (pkg && pkg.tsos && pkg.tsos.visitors instanceof Array)
     {
-        let visitorsMap: {[index:string]:{default:Visitor}} = requireDir(tsConfig.raw.tsos.visitors, { recurse: true });
-        let visitorsArray: Visitor[] = Object.keys(visitorsMap).map(key => visitorsMap[key].default);
+        visitorsArray.push
+        (
+            ...discoverVisitors(basePath, pkg.tsos.visitors as Array<string>)
+        );
     }
 
-    return tspoonTranspile(ts.sys.readFile(filePath),
+    fs.readdirSync(basePath).filter(f => fs.statSync(path.join(basePath, f)).isDirectory()).forEach(v =>
     {
-        sourceFileName: filePath,
-        compilerOptions: tsConfig.options,
-        visitors: visitorsArray
+        // Recurse into npm org packages
+        if (v.startsWith('@'))
+        {
+            visitorsArray.push(...discoverVisitorsFromNpmPackages(path.join(basePath, v)));
+            return;
+        }
+
+        // Recurse into node_modules
+        try { visitorsArray.push(...discoverVisitorsFromNpmPackages(path.join(basePath, v, 'node_modules'))); }
+        catch (e) { /* siliently fail and move on */ }
     });
+
+    return visitorsArray;
+}
+
+/**
+ * Discovers Tspoon Visitor Modules using "require-glob".
+ *
+ * @param  {string}   basePath  The base path that is prepended to each glob.
+ *
+ * @param  {string[]} globPaths An array of glob paths, that might contain
+ *                              visitor modules.
+ *
+ * @return {Visitor[]}
+ */
+export function discoverVisitors(basePath: string, globPaths: string[]): Visitor[]
+{
+    let visitorsArray: Visitor[] = [];
+
+    globPaths.forEach(glob =>
+    {
+        let visitorsMap: {[index:string]:{default:Visitor}} = requireGlob.sync
+        (
+            path.join(basePath, glob),
+            {
+                reducer: (options, result, fileObject, i, fileObjects) =>
+                {
+                    result[fileObject['path']] = fileObject['exports'];
+                    return result;
+                }
+            }
+        );
+
+        visitorsArray.push
+        (
+            ...Object.keys(visitorsMap).map
+            (
+                key => visitorsMap[key].default
+            )
+        );
+    });
+
+    return visitorsArray;
+}
+
+/**
+ * For a given basePath, using the built-in TypeScript API,
+ * this will return a completely parsed tsconfig,
+ * including any parent "extends".
+ *
+ * @param  {string} basePath The path to start searching for a
+ *                           "tsconfig.json" file.
+ *
+ * @param  {string} configName By default this is set to "tsconfig.json" but
+ *                             perhaps you want to find something else, like
+ *                             "tsconfig.es6.config".
+ *
+ * @return ts.ParsedCommandLine
+ */
+export function loadTsConfig(basePath: string, configName?: string): ts.ParsedCommandLine
+{
+    let tsConfigFileName = fs.realpathSync
+    (
+
+        ts.findConfigFile
+        (
+            basePath,
+            ts.sys.fileExists,
+            configName
+        )
+    );
+
+    let tsConfigParsedJson = ts.parseConfigFileTextToJson
+    (
+        tsConfigFileName,
+        ts.sys.readFile(tsConfigFileName)
+    );
+
+    return ts.parseJsonConfigFileContent
+    (
+        tsConfigParsedJson.config,
+        ts.sys,
+        path.dirname(tsConfigFileName),
+        null,
+        tsConfigFileName
+    );
 }

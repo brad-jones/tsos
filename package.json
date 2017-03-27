@@ -7,43 +7,50 @@
   "license": "MIT",
   "main": "./dist/tsos.js",
   "types": "./dist/tsos.d.ts",
+  "bin": {
+    "tsos": "dist/tsnode/bin.js"
+  },
   "engines": {
     "node": ">=7.0.0"
   },
   "scripts": {
-    "test": "yarn run build && jest",
-    "build": "rm -rf ./dist && ./node_modules/typescript/bin/tsc --outDir ./dist",
+    "test": "yarn run build && yarn run build-test && jest",
+    "build": "rm -rf ./dist && tsc --outDir ./dist",
+    "build-test": "tsc -p ./tests",
     "semantic-release": "semantic-release pre && npm publish --access public && semantic-release post"
   },
   "dependencies": {
+    "@brad-jones/tspoon": "^1.0.357",
+    "@types/diff": "^0.0.31",
     "@types/node": "^7.0.10",
     "@types/source-map": "^0.5.0",
+    "crypto": "^0.0.3",
+    "diff": "^3.2.0",
+    "make-error": "^1.2.3",
+    "module": "^1.2.5",
     "require-dir": "^0.3.1",
+    "require-glob": "^3.2.0",
     "tsconfig": "^6.0.0",
     "tslib": "^1.6.0",
-    "tspoon": "^1.0.354"
+    "typescript": "^2.2.1",
+    "v8flags": "^2.0.11",
+    "yn": "^1.2.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
     "cz-conventional-changelog": "^2.0.0",
     "jest": "^19.0.2",
     "semantic-release": "^6.3.2",
-    "ts-jest": "^19.0.4"
+    "shelljs": "^0.7.7"
   },
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
   },
-  "jest": {
-    "transform": {
-      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
+  "tsos": {
+    "visitors": [
+      "tests/visitors/*.js"
     ]
   }
 }
