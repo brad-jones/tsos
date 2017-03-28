@@ -1,5 +1,7 @@
 dist
 tests/**.js
 tests/**.map
+tests/output
+!tests/rollup.config.js
 node_modules
 npm-debug.log

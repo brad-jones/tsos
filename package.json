@@ -16,7 +16,7 @@
   "scripts": {
     "test": "yarn run build && yarn run build-test && jest",
     "build": "rm -rf ./dist && tsc --outDir ./dist",
-    "build-test": "tsc -p ./tests",
+    "build-test": "rm -rf ./tests/output && tsc -p ./tests",
     "semantic-release": "semantic-release pre && npm publish --access public && semantic-release post"
   },
   "dependencies": {
@@ -40,8 +40,14 @@
     "@types/jest": "^19.2.2",
     "cz-conventional-changelog": "^2.0.0",
     "jest": "^19.0.2",
+    "rollup": "^0.41.6",
+    "rollup-pluginutils": "^2.0.1",
     "semantic-release": "^6.3.2",
     "shelljs": "^0.7.7"
+  },
+  "peerDependencies": {
+    "rollup": "^0.41.6",
+    "rollup-pluginutils": "^2.0.1"
   },
   "config": {
     "commitizen": {
