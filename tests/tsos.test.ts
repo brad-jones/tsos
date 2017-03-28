@@ -8,7 +8,7 @@ const tsnodePath = 'node ' + path.join(__dirname, '/../dist/tsnode/bin.js');
 
 test('privates are removed', done =>
 {
-    let cmd = `${tsnodePath} --fast ${path.join(__dirname, '/subjects/TwoNames.ts')}`;
+    let cmd = `${tsnodePath} --fast --visitors="tests/visitors/*.js" ${path.join(__dirname, '/subjects/TwoNames.ts')}`;
     shell.exec(cmd, {silent:true}, (code: number, stdout: string, stderr: string) =>
     {
         expect(code).toBe(0);

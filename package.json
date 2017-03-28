@@ -56,7 +56,7 @@
   },
   "tsos": {
     "visitors": [
-      "tests/visitors/*.js"
+      "dist/visitors/*.js"
     ]
   }
 }

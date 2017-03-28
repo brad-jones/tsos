@@ -177,6 +177,10 @@ export function register(options: Options = {}): Register
     {
         tspoonVisitors = discoverVisitors(basePath, options.visitors);
     }
+    else if (typeof options.visitors === 'string')
+    {
+        tspoonVisitors = discoverVisitors(basePath, split(options.visitors));
+    }
     else
     {
         tspoonVisitors = discoverVisitorsFromNpmPackages(basePath);
