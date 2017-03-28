@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as shell from 'shelljs';
+import { transpileFile, discoverVisitors } from '../dist/tsos';
 
 const tsnodePath = 'node ' + path.join(__dirname, '/../dist/tsnode/bin.js');
 
@@ -43,4 +44,23 @@ test('simple rollup test', done =>
         shell.cd(__dirname + '/..');
         done();
     });
+});
+
+test('reflection visitors test', () =>
+{
+    expect
+    (
+        transpileFile
+        (
+            path.join(__dirname, '/subjects/Foo.ts'),
+            discoverVisitors(path.join(__dirname, '..'), ['dist/visitors/*.js'])
+        )  + "\n"
+    )
+    .toBe
+    (
+        fs.readFileSync
+        (
+            path.join(__dirname, '/expected/Foo.js'), 'utf8'
+        )
+    );
 });

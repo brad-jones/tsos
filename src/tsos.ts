@@ -116,7 +116,6 @@ export function loadTsConfig(basePath: string, configName?: string): ts.ParsedCo
 {
     let tsConfigFileName = fs.realpathSync
     (
-
         ts.findConfigFile
         (
             basePath,
@@ -139,4 +138,44 @@ export function loadTsConfig(basePath: string, configName?: string): ts.ParsedCo
         null,
         tsConfigFileName
     );
+}
+
+export function transpile(filePath: string, source: string, visitors: Visitor[] = [], compilerOptions?: ts.CompilerOptions): string
+{
+    if (typeof compilerOptions === 'undefined' || compilerOptions === null)
+    {
+        try
+        {
+            compilerOptions = loadTsConfig(path.dirname(filePath)).options;
+        }
+        catch(e)
+        {
+            compilerOptions = {};
+        }
+    }
+
+    const transpilerOut = tspoonTranspile(source,
+    {
+        sourceFileName: filePath,
+        compilerOptions: compilerOptions,
+        visitors: visitors
+    });
+
+    if (transpilerOut.diags)
+    {
+        transpilerOut.diags.forEach(d =>
+        {
+            var position = d.file.getLineAndCharacterOfPosition(d.start);
+            console.error('->', d.file.fileName+':'+ (1+position.line)+':'+ position.character, ':',  d.messageText);
+        });
+    }
+
+    if (transpilerOut.halted) throw new Error('Invalid TypeScript!');
+
+    return transpilerOut.code;
+}
+
+export function transpileFile(filePath: string, visitors: Visitor[] = [], compilerOptions?: ts.CompilerOptions): string
+{
+    return transpile(filePath, fs.readFileSync(filePath, 'utf8'), visitors, compilerOptions);
 }
