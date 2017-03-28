@@ -1,6 +1,6 @@
 dist
-tests/**.js
-tests/**.map
+tests/*.js
+tests/*.js.map
 tests/output
 !tests/rollup.config.js
 node_modules
