@@ -53,10 +53,5 @@
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
-  },
-  "tsos": {
-    "visitors": [
-      "dist/visitors/*.js"
-    ]
   }
 }
