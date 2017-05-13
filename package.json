@@ -20,9 +20,9 @@
     "semantic-release": "semantic-release pre && npm publish --access public && semantic-release post"
   },
   "dependencies": {
-    "@brad-jones/tspoon": "^1.0.357",
-    "@types/diff": "^0.0.31",
-    "@types/node": "^7.0.10",
+    "@brad-jones/tspoon": "^1.0.410",
+    "@types/diff": "^3.2.0",
+    "@types/node": "^7.0.18",
     "@types/source-map": "^0.5.0",
     "crypto": "^0.0.3",
     "diff": "^3.2.0",
@@ -31,18 +31,18 @@
     "require-dir": "^0.3.1",
     "require-glob": "^3.2.0",
     "tsconfig": "^6.0.0",
-    "tslib": "^1.6.0",
-    "typescript": "^2.2.1",
-    "v8flags": "^2.0.11",
-    "yn": "^1.2.0"
+    "tslib": "^1.7.0",
+    "typescript": "^2.3.2",
+    "v8flags": "^2.1.1",
+    "yn": "^2.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^19.2.2",
+    "@types/jest": "^19.2.3",
     "cz-conventional-changelog": "^2.0.0",
-    "jest": "^19.0.2",
+    "jest": "^20.0.1",
     "rollup": "^0.41.6",
     "rollup-pluginutils": "^2.0.1",
-    "semantic-release": "^6.3.2",
+    "semantic-release": "^6.3.6",
     "shelljs": "^0.7.7"
   },
   "peerDependencies": {
