@@ -1,57 +1,20 @@
 {
-  "name": "@brad-jones/tsos",
-  "version": "0.0.0-development",
-  "description": "TypeScript on Steroids",
-  "repository": "github:brad-jones/tsos",
-  "author": "Brad Jones <brad@bjc.id.au>",
-  "license": "MIT",
-  "main": "./dist/tsos.js",
-  "types": "./dist/tsos.d.ts",
-  "bin": {
-    "tsos": "dist/tsnode/bin.js"
-  },
-  "engines": {
-    "node": ">=7.0.0"
-  },
-  "scripts": {
-    "test": "yarn run build && yarn run build-test && jest",
-    "build": "rm -rf ./dist && tsc --outDir ./dist",
-    "build-test": "rm -rf ./tests/output && tsc -p ./tests",
-    "semantic-release": "semantic-release pre && npm publish --access public && semantic-release post"
-  },
-  "dependencies": {
-    "@brad-jones/tspoon": "^1.0.410",
-    "@types/diff": "^3.2.0",
-    "@types/node": "^7.0.18",
-    "@types/source-map": "^0.5.0",
-    "crypto": "^0.0.3",
-    "diff": "^3.2.0",
-    "make-error": "^1.2.3",
-    "module": "^1.2.5",
-    "require-dir": "^0.3.1",
-    "require-glob": "^3.2.0",
-    "tsconfig": "^6.0.0",
-    "tslib": "^1.7.0",
-    "typescript": "^2.3.2",
-    "v8flags": "^2.1.1",
-    "yn": "^2.0.0"
-  },
-  "devDependencies": {
-    "@types/jest": "^19.2.3",
-    "cz-conventional-changelog": "^2.0.0",
-    "jest": "^20.0.1",
-    "rollup": "^0.41.6",
-    "rollup-pluginutils": "^2.0.1",
-    "semantic-release": "^6.3.6",
-    "shelljs": "^0.7.7"
-  },
-  "peerDependencies": {
-    "rollup": "^0.41.6",
-    "rollup-pluginutils": "^2.0.1"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
+    "name": "tsos",
+    "version": "0.0.0",
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
+    "scripts": {
+        "lerna": "lerna",
+        "commit": "commit",
+        "commitmsg": "commitlint -e"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^3.2.0",
+        "@commitlint/config-angular": "^3.1.1",
+        "@commitlint/prompt-cli": "^3.2.0",
+        "husky": "^0.14.3",
+        "lerna": "^2.1.2"
     }
-  }
 }

@@ -1,0 +1,23 @@
+{
+    "name": "tsos-cli",
+    "version": "1.0.0",
+    "author": "Brad Jones <brad@bjc.id.au>",
+    "license": "MIT",
+    "scripts": {
+        "build": "yarn run clean && tsc -p ./src/tsconfig.json --outDir ./dist",
+        "clean": "rm -rf ./dist && mkdir ./dist"
+    },
+    "bin": {
+        "tsos": "./dist/Program.js"
+    },
+    "dependencies": {
+        "caporal": "^0.7.0",
+        "tsos-compiler": "^1.0.0"
+    },
+    "devDependencies": {
+        "typescript": "^2.5.2"
+    },
+    "peerDependencies": {
+        "typescript": "^2.5.2"
+    }
+}
