@@ -6,7 +6,7 @@ function getPackages()
         .map(pkg => pkg.name)
         .map(name => (name.charAt(0) === '@' ? name.split('/')[1] : name));
 
-    packages.push('root');
+    packages.push('tsos-root');
 
     return packages;
 }
