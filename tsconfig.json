@@ -1,16 +1,11 @@
 {
+    "extends": "./tsconfig.base.json",
     "compilerOptions": {
         "baseUrl": "./packages",
         "paths": {
             "@brad-jones/*": [
                 "./*/src"
             ]
-        },
-        "target": "es2017",
-        "module": "commonjs",
-        "importHelpers": true,
-        "moduleResolution": "node",
-        "declaration": true,
-        "sourceMap": true
+        }
     }
 }

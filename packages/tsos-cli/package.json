@@ -8,7 +8,7 @@
         "tsos": "./dist/index.js"
     },
     "scripts": {
-        "prepublish": "tsc -p tsconfig.json"
+        "prepublish": "tsc -p tsconfig.build.json"
     },
     "dependencies": {
         "@brad-jones/tsos-compiler": "^1.0.0",
