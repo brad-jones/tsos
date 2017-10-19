@@ -1,6 +1,4 @@
 {
-    "name": "@brad-jones/tsos-root",
-    "version": "0.0.0",
     "private": true,
     "workspaces": [
         "packages/*"
@@ -9,16 +7,17 @@
         "lerna": "lerna",
         "commit": "commit",
         "commitmsg": "commitlint -e",
-        "build": "lerna bootstrap; lerna run prepublish",
-        "clean": "lerna clean --yes; shx rm -rf ./packages/**/dist"
+        "build": "lerna bootstrap; lerna run build",
+        "clean": "lerna clean --yes; lerna run clean",
+        "watch": "nodemon -e ts,js,json,env -i dist/ -x 'bash -c' 'yarn run clean; yarn run build;'"
     },
     "devDependencies": {
-        "@commitlint/cli": "^3.2.0",
-        "@commitlint/config-angular": "^3.1.1",
-        "@commitlint/prompt-cli": "^3.2.0",
-        "husky": "^0.14.3",
-        "lerna": "^2.3.1",
         "shx": "^0.2.2",
-        "typescript": "^2.5.3"
+        "lerna": "^2.3.1",
+        "husky": "^0.14.3",
+        "nodemon": "^1.12.1",
+        "@commitlint/cli": "^4.2.1",
+        "@commitlint/prompt-cli": "^4.2.1",
+        "@commitlint/config-angular": "^4.2.1"
     }
 }

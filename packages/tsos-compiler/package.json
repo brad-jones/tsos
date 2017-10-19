@@ -7,13 +7,29 @@
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "scripts": {
-        "prepublish": "tsc -p tsconfig.build.json"
+        "clean": "shx rm -rf ./dist",
+        "build": "tsc -p tsconfig.build.json",
+        "watch": "nodemon -e ts,js,json,env -i ./dist -x 'bash -c' 'yarn run clean; yarn run build;'"
     },
     "dependencies": {
+        "mz": "^2.7.0",
         "tslib": "^1.7.1",
-        "ts-simple-ast": "^0.71.1"
+        "lodash": "^4.17.4",
+        "inversify": "^4.3.0",
+        "glob-promise": "^3.2.0",
+        "require-glob": "^3.2.0",
+        "ts-simple-ast": "^0.74.0",
+        "deasync-promise": "^1.0.1"
     },
     "peerDependencies": {
         "typescript": "^2.5.3"
+    },
+    "devDependencies": {
+        "shx": "^0.2.2",
+        "nodemon": "^1.12.1",
+        "typescript": "^2.5.3",
+        "@types/mz": "^0.0.32",
+        "@types/node": "^8.0.33",
+        "@types/lodash": "^4.14.77"
     }
 }

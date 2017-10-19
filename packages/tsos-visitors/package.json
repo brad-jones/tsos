@@ -7,13 +7,27 @@
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "scripts": {
-        "prepublish": "tsc -p tsconfig.build.json"
+        "clean": "shx rm -rf ./dist",
+        "build": "tsc -p tsconfig.build.json",
+        "watch": "nodemon -e ts,js,json,env -i ./dist -x 'bash -c' 'yarn run clean; yarn run build;'"
     },
     "dependencies": {
         "tslib": "^1.7.1",
-        "ts-simple-ast": "^0.71.1"
+        "ts-simple-ast": "^0.74.0"
     },
     "peerDependencies": {
         "typescript": "^2.5.3"
+    },
+    "devDependencies": {
+        "shx": "^0.2.2",
+        "nodemon": "^1.12.1",
+        "typescript": "^2.5.3",
+        "@types/node": "^8.0.33",
+        "@brad-jones/tsos-compiler": "^1.0.0"
+    },
+    "tsos": {
+        "visitors": [
+            "./dist/visitors/**/*.js"
+        ]
     }
 }

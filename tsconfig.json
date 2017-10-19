@@ -5,6 +5,9 @@
         "paths": {
             "@brad-jones/*": [
                 "./*/src"
+            ],
+            "app/*": [
+                "./tsos-cli/src/app/*"
             ]
         }
     }
