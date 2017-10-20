@@ -9,7 +9,7 @@
     "scripts": {
         "clean": "shx rm -rf ./dist",
         "build": "tsc -p tsconfig.build.json",
-        "test": "echo 'Tests Comming Soon'"
+        "test": "../tsos-cli/dist/index.js runner ./tests/runner.ts --no-visitors"
     },
     "dependencies": {
         "mz": "^2.7.0",
@@ -26,6 +26,7 @@
     },
     "devDependencies": {
         "shx": "^0.2.2",
+        "alsatian": "^2.0.0",
         "typescript": "^2.5.3",
         "@types/mz": "^0.0.32",
         "@types/node": "^8.0.33",

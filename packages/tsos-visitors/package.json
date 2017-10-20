@@ -9,7 +9,7 @@
     "scripts": {
         "clean": "shx rm -rf ./dist",
         "build": "tsc -p tsconfig.build.json",
-        "test": "tsos runner ./tests/runner.ts --no-visitors"
+        "test": "../tsos-cli/dist/index.js runner ./tests/runner.ts --no-visitors"
     },
     "dependencies": {
         "tslib": "^1.7.1",
@@ -26,7 +26,6 @@
         "@types/mz": "^0.0.32",
         "@types/node": "^8.0.33",
         "@types/shelljs": "^0.7.4",
-        "@brad-jones/tsos-cli": "^1.0.0",
         "@brad-jones/tsos-compiler": "^1.0.0"
     },
     "tsos": {

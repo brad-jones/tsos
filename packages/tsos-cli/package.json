@@ -10,7 +10,7 @@
     "scripts": {
         "clean": "shx rm -rf ./dist",
         "build": "tsc -p tsconfig.build.json",
-        "test": "echo 'Tests Comming Soon'"
+        "test": "echo 'Tests Comming Soon :)';"
     },
     "dependencies": {
         "tslib": "^1.7.1",
@@ -31,6 +31,7 @@
     },
     "devDependencies": {
         "shx": "^0.2.2",
+        "alsatian": "^2.0.0",
         "typescript": "^2.5.3",
         "@types/node": "^8.0.33",
         "@types/shelljs": "^0.7.4",
