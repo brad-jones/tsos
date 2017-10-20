@@ -57,6 +57,10 @@ export class TsOsCompiler
         if (astVisitorFinder === null) this.astVisitorFinder = new AstVisitorFinder();
     }
 
+    public ConfigureAst(ast: TsSimpleAst): Promise<void>;
+    public ConfigureAst(compilerOptions: ts.CompilerOptions): Promise<void>;
+    public ConfigureAst(tsConfigFilePath: string, additionalCompilerOptions?: ts.CompilerOptions, autoAddSrcFiles?: boolean): Promise<void>;
+    public ConfigureAst(parsedTsConfig: ts.ParsedCommandLine, additionalCompilerOptions?: ts.CompilerOptions, autoAddSrcFiles?: boolean): Promise<void>;
     public async ConfigureAst(...args): Promise<void>
     {
         // Take the provided TsSimpleAst object as is,
@@ -109,6 +113,10 @@ export class TsOsCompiler
         throw new Error('Invalid parameters provided!');
     }
 
+    public ConfigureAstSync(ast: TsSimpleAst): void;
+    public ConfigureAstSync(compilerOptions: ts.CompilerOptions): void;
+    public ConfigureAstSync(tsConfigFilePath: string, additionalCompilerOptions?: ts.CompilerOptions, autoAddSrcFiles?: boolean): void;
+    public ConfigureAstSync(parsedTsConfig: ts.ParsedCommandLine, additionalCompilerOptions?: ts.CompilerOptions, autoAddSrcFiles?: boolean): void;
     public ConfigureAstSync(...args): void
     {
         deasync(this.ConfigureAst.apply(this, args));
@@ -119,6 +127,9 @@ export class TsOsCompiler
         this.ast.addSourceFiles.apply(this.ast, fileGlobs);
     }
 
+    public AddAstVisitors(basePath: string): Promise<void>;
+    public AddAstVisitors(globs: string[]): Promise<void>;
+    public AddAstVisitors(visitors: IAstVisitor[]): Promise<void>;
     public async AddAstVisitors(...args): Promise<void>
     {
         if (args[0] instanceof Array)
@@ -144,11 +155,16 @@ export class TsOsCompiler
         throw new Error('Invalid parameters provided!');
     }
 
+    public AddAstVisitorsSync(basePath: string): void;
+    public AddAstVisitorsSync(globs: string[]): void;
+    public AddAstVisitorsSync(visitors: IAstVisitor[]): void;
     public AddAstVisitorsSync(...args): void
     {
         deasync(this.AddAstVisitors.apply(this, args));
     }
 
+    public Emit(emitOptions?: EmitOptions): Promise<EmitResult>;
+    public Emit(srcFiles: string[], emitOptions?: EmitOptions): Promise<Map<string, EmitResult>>;
     public async Emit(...args): Promise<any>
     {
         for (let visitor of this.astVisitors)
@@ -176,6 +192,8 @@ export class TsOsCompiler
         return this.ast.emit(args[0]);
     }
 
+    public EmitSync(emitOptions?: EmitOptions): EmitResult;
+    public EmitSync(srcFiles: string[], emitOptions?: { emitOnlyDtsFiles?: boolean }): Map<string, EmitResult>;
     public EmitSync(...args): any
     {
         return deasync(this.Emit.apply(this, args));

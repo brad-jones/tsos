@@ -15,7 +15,7 @@ export let INodeHook = Symbol(__filename);
 
 export interface INodeHook
 {
-    Register(tsCliOptions: string[], astVisitorGlobs?: string[], transpilationCache?: boolean): void;
+    Register(tsCliOptions: string[], astVisitorGlobs?: string[] | boolean, transpilationCache?: boolean): void;
     Transpile(source: string, filename: string): string;
 }
 
@@ -28,6 +28,8 @@ export interface IStaticNodeHook
 @Implements<IStaticNodeHook>()
 export class NodeHook
 {
+    private noVisitors: boolean = false;
+
     private transpiledFiles: Map<string, string>;
 
     private transpilationCache: boolean;
@@ -48,11 +50,20 @@ export class NodeHook
         @inject(IAstVisitorFinder) private astVisitorFinder: IAstVisitorFinder
     ){}
 
-    public Register(tsCliOptions: string[], astVisitorGlobs: string[] = [], transpilationCache = true): void
+    public Register(tsCliOptions: string[], astVisitorGlobs: string[] | boolean = [], transpilationCache = true): void
     {
         this.transpiledFiles = new Map<string, string>();
         this.transpilationCache = transpilationCache;
-        this.astVisitorsFromCli = this.astVisitorFinder.FindByGlobSync(astVisitorGlobs);
+
+        if (Array.isArray(astVisitorGlobs))
+        {
+            this.astVisitorsFromCli = this.astVisitorFinder.FindByGlobSync(astVisitorGlobs);
+        }
+        else
+        {
+            this.noVisitors = true;
+        }
+
         this.cliConfig = this.tsCliParser.ParseTsOptions(tsCliOptions);
         this.cliConfigString = JSON.stringify(this.cliConfig);
         nodeHook.hook('.ts', this.Transpile.bind(this));
@@ -73,14 +84,18 @@ export class NodeHook
         }
 
         let astVisitors: IAstVisitor[] = [];
-        astVisitors.push(...this.astVisitorsFromCli);
-        if (config.options.configFilePath)
+
+        if (!this.noVisitors)
         {
-            astVisitors.push(...this.astVisitorFinder.FindFromNpmPackagesSync(path.dirname(config.options.configFilePath as string)));
-        }
-        else
-        {
-            astVisitors.push(...this.astVisitorFinder.FindFromNpmPackagesSync(path.dirname(filename)));
+            astVisitors.push(...this.astVisitorsFromCli);
+            if (config.options.configFilePath)
+            {
+                astVisitors.push(...this.astVisitorFinder.FindFromNpmPackagesSync(path.dirname(config.options.configFilePath as string)));
+            }
+            else
+            {
+                astVisitors.push(...this.astVisitorFinder.FindFromNpmPackagesSync(path.dirname(filename)));
+            }
         }
 
         let fileNameHash = xxhash(filename, 0xCAFEBABE).toString();

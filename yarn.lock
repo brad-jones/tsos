@@ -126,8 +126,8 @@
     "@types/node" "*"
 
 "@types/lodash@^4.14.77":
-  version "4.14.77"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.77.tgz#0bc699413e84d6ed5d927ca30ea0f0a890b42d75"
+  version "4.14.78"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.78.tgz#f26a0b38a44a832c652964803c7e48be05939d3f"
 
 "@types/minimatch@*":
   version "3.0.1"
@@ -139,9 +139,9 @@
   dependencies:
     "@types/node" "*"
 
-"@types/node@*", "@types/node@^8.0.33":
-  version "8.0.44"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.44.tgz#5c39800fda4b76dab39a5f28fda676fc500015ac"
+"@types/node@*", "@types/node@>=0.0.2", "@types/node@^8.0.33":
+  version "8.0.46"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.46.tgz#6e1766b2d0ed06631d5b5f87bb8e72c8dbb6888e"
 
 "@types/shelljs@^0.7.4":
   version "0.7.4"
@@ -205,6 +205,16 @@ align-text@^0.1.1, align-text@^0.1.3:
     kind-of "^3.0.2"
     longest "^1.0.1"
     repeat-string "^1.5.2"
+
+alsatian@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/alsatian/-/alsatian-2.0.0.tgz#7df8d1f88c41753d50fce280dc66be7938a64eee"
+  dependencies:
+    "@types/node" ">=0.0.2"
+    extendo-error "^1.0.1"
+    glob "^7.0.3"
+    reflect-metadata "^0.1.3"
+    tap-bark "1.0.0"
 
 amdefine@>=0.0.4:
   version "1.0.1"
@@ -1107,6 +1117,10 @@ event-stream@~3.3.0:
     stream-combiner "~0.0.4"
     through "~2.3.1"
 
+events-to-array@^1.0.1:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/events-to-array/-/events-to-array-1.1.2.tgz#2d41f563e1fe400ed4962fe1a4d5c6a7539df7f6"
+
 execa@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/execa/-/execa-0.7.0.tgz#944becd34cc41ee32a63a9faf27ad5a65fc59777"
@@ -1150,6 +1164,10 @@ expand-range@^1.8.1:
 extend@3, extend@^3.0.0, extend@~3.0.0, extend@~3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.1.tgz#a755ea7bc1adfcc5a31ce7e762dbaadc5e636444"
+
+extendo-error@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/extendo-error/-/extendo-error-1.0.1.tgz#30325e0cf6c2fa5f91023d2100ed021826e6317d"
 
 external-editor@^1.1.0:
   version "1.1.1"
@@ -1968,7 +1986,7 @@ isstream@0.1.x, isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
-js-yaml@^3.9.0:
+js-yaml@^3.2.7, js-yaml@^3.9.0:
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.10.0.tgz#2e78441646bd4682e963f22b6e92823c309c62dc"
   dependencies:
@@ -2886,8 +2904,8 @@ punycode@^1.4.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
 
 q@^1.4.1:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/q/-/q-1.5.0.tgz#dd01bac9d06d30e6f219aecb8253ee9ebdc308f1"
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
 
 qs@~6.2.0:
   version "6.2.3"
@@ -2957,7 +2975,7 @@ read-pkg@^2.0.0:
     normalize-package-data "^2.3.2"
     path-type "^2.0.0"
 
-readable-stream@^2.0.2, readable-stream@^2.0.6, readable-stream@^2.1.4, readable-stream@^2.1.5, readable-stream@^2.2.2:
+readable-stream@^2, readable-stream@^2.0.2, readable-stream@^2.0.6, readable-stream@^2.1.4, readable-stream@^2.1.5, readable-stream@^2.2.2:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.3.tgz#368f2512d79f9d46fdfc71349ae7878bbc1eb95c"
   dependencies:
@@ -3010,7 +3028,7 @@ redent@^1.0.0:
     indent-string "^2.1.0"
     strip-indent "^1.0.1"
 
-reflect-metadata@^0.1.10:
+reflect-metadata@^0.1.10, reflect-metadata@^0.1.3:
   version "0.1.10"
   resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.10.tgz#b4f83704416acad89988c9b15635d47e03b9344a"
 
@@ -3595,6 +3613,25 @@ tabtab@^2.2.2:
     npmlog "^2.0.3"
     object-assign "^4.1.0"
 
+tap-bark@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/tap-bark/-/tap-bark-1.0.0.tgz#6c03dc51687fed7877f823ad4b1ddd1ef5eb5674"
+  dependencies:
+    "@types/node" ">=0.0.2"
+    chalk "^1.1.3"
+    duplexer "^0.1.1"
+    tap-parser "^3.0.3"
+    through2 "^2.0.1"
+
+tap-parser@^3.0.3:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/tap-parser/-/tap-parser-3.0.5.tgz#b947f69e0b3e53d4b92011f6cc552e16dadc7ec9"
+  dependencies:
+    events-to-array "^1.0.1"
+    js-yaml "^3.2.7"
+  optionalDependencies:
+    readable-stream "^2"
+
 tar-pack@^3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/tar-pack/-/tar-pack-3.4.0.tgz#23be2d7f671a8339376cbdb0b8fe3fdebf317984"
@@ -3664,7 +3701,7 @@ throat@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/throat/-/throat-4.1.0.tgz#89037cbc92c56ab18926e6ba4cbb200e15672a6a"
 
-through2@^2.0.0, through2@^2.0.2:
+through2@^2.0.0, through2@^2.0.1, through2@^2.0.2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/through2/-/through2-2.0.3.tgz#0004569b37c7c74ba39c43f3ced78d1ad94140be"
   dependencies:

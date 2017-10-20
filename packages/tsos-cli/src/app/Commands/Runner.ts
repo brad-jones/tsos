@@ -17,6 +17,7 @@ export interface ICmdOptions
     noCache: boolean;
     tsOptions: string[];
     astVisitors: string[];
+    noVisitors: boolean;
 }
 
 @injectable()
@@ -35,6 +36,7 @@ export default class Runner implements ICommand
         config.option('--no-cache', 'If set transpilation cache will be disabled.', caporal.BOOLEAN, false);
         config.option('--ts-options', 'A csv list of arguments / options that are accepted by tsc.', caporal.LIST, [], false);
         config.option('--ast-visitors', 'A csv list of file globs where we might find some visitor modules.', caporal.LIST, [], false);
+        config.option('--no-visitors', 'If set, no auto discovered visitors will be applied.', caporal.BOOLEAN, false);
         config.help('Hot Tip: If you do not need to provide any custom options to node, call this command directly to boost performance.');
     }
 
@@ -45,7 +47,7 @@ export default class Runner implements ICommand
         let normalisedVisitors = options.astVisitors.map(_ => _.startsWith('/') ? _ : path.join(process.cwd(), _));
 
         // This is what makes typescript files get compiled on the fly.
-        this.nodeHook.Register(options.tsOptions, normalisedVisitors, !options.noCache);
+        this.nodeHook.Register(options.tsOptions, options.noVisitors || normalisedVisitors, !options.noCache);
 
         // Exceptions get swallowed if we do not wrap the require here.
         try

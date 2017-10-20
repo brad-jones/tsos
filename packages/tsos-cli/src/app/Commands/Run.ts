@@ -13,9 +13,10 @@ export interface ICmdArguments
 export interface ICmdOptions
 {
     noCache: boolean;
-    tsOptions: string | undefined,
-    nodeOptions: string[] | undefined,
-    astVisitors: string | undefined
+    tsOptions: string | undefined;
+    nodeOptions: string[] | undefined;
+    astVisitors: string | undefined;
+    noVisitors: boolean;
 }
 
 @injectable()
@@ -30,6 +31,7 @@ export default class Run implements ICommand
         config.option('--ts-options', 'A csv list of arguments / options that are accepted by tsc.', caporal.STRING, undefined, false);
         config.option('--node-options', 'A csv list of arguments / options that are accepted by node.', caporal.LIST, undefined, false);
         config.option('--ast-visitors', 'A csv list of file globs where we might find some visitor modules.', caporal.STRING, undefined, false);
+        config.option('--no-visitors', 'If set, no auto discovered visitors will be applied.', caporal.BOOLEAN, false);
     }
 
     public async OnExecute(args: ICmdArguments, options: ICmdOptions, logger: ILogger)
@@ -61,6 +63,7 @@ export default class Run implements ICommand
         // Proxy arguments and options through to the runner.
         procArgs.push(args.script);
         if (options.noCache) procArgs.push('--no-cache');
+        if (options.noVisitors) procArgs.push('--no-visitors');
         if (options.tsOptions) { procArgs.push('--ts-options'); procArgs.push(options.tsOptions); }
         if (options.astVisitors) { procArgs.push('--ast-visitors'); procArgs.push(options.astVisitors); }
 

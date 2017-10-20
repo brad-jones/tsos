@@ -9,7 +9,7 @@
     "scripts": {
         "clean": "shx rm -rf ./dist",
         "build": "tsc -p tsconfig.build.json",
-        "watch": "nodemon -e ts,js,json,env -i ./dist -x 'bash -c' 'yarn run clean; yarn run build;'"
+        "test": "tsos runner ./tests/runner.ts --no-visitors"
     },
     "dependencies": {
         "tslib": "^1.7.1",
@@ -19,10 +19,14 @@
         "typescript": "^2.5.3"
     },
     "devDependencies": {
+        "mz": "^2.7.0",
         "shx": "^0.2.2",
-        "nodemon": "^1.12.1",
+        "alsatian": "^2.0.0",
         "typescript": "^2.5.3",
+        "@types/mz": "^0.0.32",
         "@types/node": "^8.0.33",
+        "@types/shelljs": "^0.7.4",
+        "@brad-jones/tsos-cli": "^1.0.0",
         "@brad-jones/tsos-compiler": "^1.0.0"
     },
     "tsos": {
