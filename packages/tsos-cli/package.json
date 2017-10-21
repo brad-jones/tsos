@@ -1,6 +1,6 @@
 {
     "name": "@brad-jones/tsos-cli",
-    "version": "1.0.0",
+    "version": "2.0.0-rc.1",
     "description": "Provides a cli interface for the tsos-compiler.",
     "author": "Brad Jones <brad@bjc.id.au>",
     "license": "MIT",
@@ -25,7 +25,7 @@
         "reflect-metadata": "^0.1.10",
         "source-map-support": "^0.5.0",
         "replace-in-file": "^3.0.0-beta.2",
-        "@brad-jones/tsos-compiler": "^1.0.0"
+        "@brad-jones/tsos-compiler": "^2.0.0-rc.1"
     },
     "peerDependencies": {
         "typescript": "^2.5.3"
