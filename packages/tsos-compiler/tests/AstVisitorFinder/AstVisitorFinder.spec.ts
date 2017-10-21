@@ -9,7 +9,7 @@ export class AstVisitorFinderFixture
         let finder = new AstVisitorFinder();
         let result = await finder.FindByGlob([`${__dirname}/**/*.visitor.js`]);
         Expect(Array.isArray(result)).toBeTruthy();
-        Expect(result.length).toBe(2);
+        Expect(result.length).toBe(3);
         result.forEach(_ => Expect(typeof _).toEqual("function"));
     }
 
