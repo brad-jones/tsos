@@ -7,11 +7,11 @@
         "lerna": "lerna",
         "commit": "commit",
         "commitmsg": "commitlint -e",
-        "clean": "lerna clean --yes; lerna run clean;",
+        "clean": "lerna clean --yes; lerna run clean --parallel; shx rm -rf ./test-results",
         "build": "lerna run build; lerna bootstrap;",
         "rebuild": "yarn run clean; yarn run build;",
         "watch": "nodemon -e ts,js,json,env -i dist/ -i tests/ -x 'yarn run rebuild'",
-        "test": "lerna run test;"
+        "test": "lerna run test --parallel --stream;"
     },
     "devDependencies": {
         "shx": "^0.2.2",

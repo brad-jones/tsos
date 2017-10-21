@@ -9,7 +9,7 @@
     "scripts": {
         "clean": "shx rm -rf ./dist",
         "build": "tsc -p tsconfig.build.json",
-        "test": "../tsos-cli/dist/index.js runner ./tests/runner.ts --no-visitors | tap-xunit > ../../test-results/tsos-visitors/report.xml",
+        "test": "../tsos-cli/dist/index.js runner ./tests/runner.ts --no-visitors",
         "cover": "nyc --reporter=html yarn test && nyc report"
     },
     "dependencies": {
@@ -24,6 +24,7 @@
         "shx": "^0.2.2",
         "nyc": "^11.2.1",
         "alsatian": "^2.0.0",
+        "tap-spec": "^4.1.1",
         "tap-xunit": "^1.7.0",
         "typescript": "^2.5.3",
         "@types/mz": "^0.0.32",
