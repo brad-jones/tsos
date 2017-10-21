@@ -13,28 +13,31 @@
         "cover": "nyc --exclude \"tests/**\" --report-dir ../../test-results/tsos-visitors/coverage --reporter=html --reporter=clover yarn test; nyc report --report-dir ../../test-results/tsos-visitors/coverage;"
     },
     "dependencies": {
-        "tslib": "^1.7.1",
-        "ts-simple-ast": "^0.74.0"
+        "ts-simple-ast": "^0.74.0",
+        "tslib": "^1.7.1"
     },
     "peerDependencies": {
         "typescript": "^2.5.3"
     },
     "devDependencies": {
-        "mz": "^2.7.0",
-        "shx": "^0.2.2",
-        "nyc": "^11.2.1",
-        "alsatian": "^2.0.0",
-        "tap-spec": "^4.1.1",
-        "tap-xunit": "^1.7.0",
-        "typescript": "^2.5.3",
+        "@brad-jones/tsos-compiler": "^2.0.0-rc.1",
         "@types/mz": "^0.0.32",
         "@types/node": "^8.0.33",
         "@types/shelljs": "^0.7.4",
-        "@brad-jones/tsos-compiler": "^2.0.0-rc.1"
+        "alsatian": "^2.0.0",
+        "mz": "^2.7.0",
+        "nyc": "^11.2.1",
+        "shx": "^0.2.2",
+        "tap-spec": "^4.1.1",
+        "tap-xunit": "^1.7.0",
+        "typescript": "^2.5.3"
     },
     "tsos": {
         "visitors": [
             "./dist/visitors/**/*.js"
         ]
+    },
+    "publishConfig": {
+        "access": "public"
     }
 }
