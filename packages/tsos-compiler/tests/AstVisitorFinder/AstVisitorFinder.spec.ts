@@ -1,4 +1,4 @@
-import { Expect, Test, AsyncTest } from "alsatian";
+import { Expect, Test, AsyncTest, Timeout } from "alsatian";
 import { AstVisitorFinder } from '@brad-jones/tsos-compiler';
 
 export class AstVisitorFinderFixture
@@ -24,6 +24,7 @@ export class AstVisitorFinderFixture
     }
 
     @AsyncTest()
+    @Timeout(1000)
     public async FindFromNpmPackages()
     {
         let finder = new AstVisitorFinder();
@@ -34,6 +35,7 @@ export class AstVisitorFinderFixture
     }
 
     @Test()
+    @Timeout(1000)
     public FindFromNpmPackagesSync()
     {
         let finder = new AstVisitorFinder();
