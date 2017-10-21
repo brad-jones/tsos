@@ -11,7 +11,8 @@
         "build": "lerna run build; lerna bootstrap;",
         "rebuild": "yarn run clean; yarn run build;",
         "watch": "nodemon -e ts,js,json,env -i dist/ -i tests/ -x 'yarn run rebuild'",
-        "test": "lerna run test --parallel --stream;"
+        "test": "lerna run test --parallel --stream;",
+        "cover": "lerna run cover --parallel --stream;"
     },
     "devDependencies": {
         "shx": "^0.2.2",

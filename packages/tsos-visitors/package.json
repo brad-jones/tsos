@@ -7,10 +7,10 @@
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "scripts": {
-        "clean": "shx rm -rf ./dist",
+        "clean": "shx rm -rf ./dist; shx rm -rf ./.nyc_output",
         "build": "tsc -p tsconfig.build.json",
         "test": "../tsos-cli/dist/index.js runner ./tests/runner.ts --no-visitors",
-        "cover": "nyc --reporter=html yarn test && nyc report"
+        "cover": "nyc --exclude \"tests/**\" --report-dir ../../test-results/tsos-visitors/coverage --reporter=html --reporter=clover yarn test; nyc report --report-dir ../../test-results/tsos-visitors/coverage;"
     },
     "dependencies": {
         "tslib": "^1.7.1",

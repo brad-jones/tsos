@@ -8,9 +8,10 @@
         "tsos": "./dist/index.js"
     },
     "scripts": {
-        "clean": "shx rm -rf ./dist",
+        "clean": "shx rm -rf ./dist; shx rm -rf ./.nyc_output",
         "build": "tsc -p tsconfig.build.json; shx chmod +x ./dist/index.js",
-        "test": "echo 'Tests Comming Soon :)';"
+        "test": "echo 'Tests Comming Soon :)';",
+        "cover": "echo 'Tests Comming Soon :)';"
     },
     "dependencies": {
         "tslib": "^1.7.1",
