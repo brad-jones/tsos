@@ -14,6 +14,8 @@ jobs:
             - ./node_modules
       - run: yarn build
       - run: mkdir ~/project/test-results
+      - run: mkdir ~/project/test-results/tsos-compiler
+      - run: mkdir ~/project/test-results/tsos-visitors
       - run: yarn test
       - store_test_results:
           path: ~/project/test-results

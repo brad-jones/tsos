@@ -9,7 +9,7 @@
     "scripts": {
         "clean": "shx rm -rf ./dist",
         "build": "tsc -p tsconfig.build.json",
-        "test": "../tsos-cli/dist/index.js runner ./tests/runner.ts --no-visitors | tap-xunit > ../../test-results/tsos-visitors.xml",
+        "test": "../tsos-cli/dist/index.js runner ./tests/runner.ts --no-visitors | tap-xunit > ../../test-results/tsos-visitors/report.xml",
         "cover": "nyc --reporter=html yarn test && nyc report"
     },
     "dependencies": {
