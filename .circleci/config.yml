@@ -16,3 +16,5 @@ jobs:
       - run: yarn test
       - store_test_results:
           path: ~/project/test-results
+      - store_artifacts:
+          path: ~/project/test-results
