@@ -14,5 +14,5 @@ jobs:
             - ./node_modules
       - run: yarn build
       - run: yarn test
-
-
+      - store_test_results:
+          path: ~/project/test-results
