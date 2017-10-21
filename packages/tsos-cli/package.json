@@ -9,7 +9,7 @@
     },
     "scripts": {
         "clean": "shx rm -rf ./dist",
-        "build": "tsc -p tsconfig.build.json",
+        "build": "tsc -p tsconfig.build.json; shx chmod +x ./dist/index.js",
         "test": "echo 'Tests Comming Soon :)';"
     },
     "dependencies": {
