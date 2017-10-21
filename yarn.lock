@@ -498,9 +498,9 @@ camelcase@^4.0.0, camelcase@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
 
-"caporal@https://github.com/mattallty/Caporal.js.git#master":
-  version "0.7.0"
-  resolved "https://github.com/mattallty/Caporal.js.git#6d2a911f7a1521f48d23eac03717077cc88bd379"
+caporal@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/caporal/-/caporal-0.8.0.tgz#1ff65235bf2cd0d03495b6b40eba58e95c41c5ea"
   dependencies:
     bluebird "^3.4.7"
     chalk "^1.1.3"
