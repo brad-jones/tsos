@@ -18,3 +18,4 @@ jobs:
           path: ~/project/test-results
       - store_artifacts:
           path: ~/project/test-results
+      - run: bash <(curl -s https://codecov.io/bash)
