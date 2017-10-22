@@ -10,6 +10,7 @@ export default new ContainerModule
     {
         bind<INodeHook>(INodeHook).to(NodeHook);
         bind<ITsOsCompiler>(ITsOsCompiler).to(TsOsCompiler);
+        bind<interfaces.Factory<ITsOsCompiler>>("Factory<ITsOsCompiler>").toAutoFactory<ITsOsCompiler>(ITsOsCompiler);
         bind<ITsConfigLoader>(ITsConfigLoader).to(TsConfigLoader);
         bind<IAstVisitorFinder>(IAstVisitorFinder).to(AstVisitorFinder);
         bind<ICommandLineParser>(ICommandLineParser).to(CommandLineParser);

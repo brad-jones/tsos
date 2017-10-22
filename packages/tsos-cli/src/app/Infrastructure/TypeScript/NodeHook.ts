@@ -4,9 +4,9 @@ import * as ts from 'typescript';
 import * as shell from 'shelljs';
 import nodeHook = require('node-hook');
 import { h64 as xxhash } from 'xxhashjs';
-import { inject, injectable } from 'inversify';
 import { readFileSync, writeFileSync } from 'fs';
 import replaceInFile = require('replace-in-file');
+import { inject, injectable, interfaces } from 'inversify';
 import { install as sourceMapSupport } from 'source-map-support';
 import { ICommandLineParser } from 'app/Infrastructure/TypeScript/CommandLineParser';
 import { Implements, ITsConfigLoader, ITsOsCompiler, IAstVisitor, IAstVisitorFinder } from '@brad-jones/tsos-compiler';
@@ -44,10 +44,10 @@ export class NodeHook
 
     public constructor
     (
-        @inject(ITsOsCompiler) private tsOsCompiler: ITsOsCompiler,
         @inject(ITsConfigLoader) private tsConfigLoader: ITsConfigLoader,
         @inject(ICommandLineParser) private tsCliParser: ICommandLineParser,
-        @inject(IAstVisitorFinder) private astVisitorFinder: IAstVisitorFinder
+        @inject(IAstVisitorFinder) private astVisitorFinder: IAstVisitorFinder,
+        @inject("Factory<ITsOsCompiler>") private tsOsCompilerFactory: interfaces.Factory<ITsOsCompiler>
     ){}
 
     public Register(tsCliOptions: string[], astVisitorGlobs: string[] | boolean = [], transpilationCache = true): void
@@ -137,9 +137,10 @@ export class NodeHook
         additionalCompilerOptions.declaration = false;
 
         // Run the compilation
-        this.tsOsCompiler.ConfigureAstSync(config, additionalCompilerOptions);
-        this.tsOsCompiler.AddAstVisitorsSync(astVisitors);
-        let result = this.tsOsCompiler.EmitSync([srcFileName]).get(srcFileName);
+        let compiler = this.tsOsCompilerFactory() as ITsOsCompiler;
+        compiler.ConfigureAstSync(config, additionalCompilerOptions);
+        compiler.AddAstVisitorsSync(astVisitors);
+        let result = compiler.EmitSync([srcFileName]).get(srcFileName);
 
         // Check for errors
         let diag = result.getDiagnostics();
