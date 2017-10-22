@@ -13,7 +13,7 @@
         "cover": "nyc --exclude \"tests/**\" --report-dir ../../test-results/tsos-visitors/coverage --reporter=html --reporter=clover yarn test; nyc report --report-dir ../../test-results/tsos-visitors/coverage;"
     },
     "dependencies": {
-        "ts-simple-ast": "^0.74.0",
+        "ts-simple-ast": "^0.77.0",
         "tslib": "^1.7.1"
     },
     "peerDependencies": {
