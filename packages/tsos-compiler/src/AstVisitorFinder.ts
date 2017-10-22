@@ -5,7 +5,6 @@ import { Implements } from './Decorators';
 import deasync = require('deasync-promise');
 import { IAstVisitor } from './IAstVisitor';
 import requireGlob = require('require-glob');
-import globPromise = require('glob-promise');
 import { inject, injectable } from 'inversify';
 import { TsConfigLoader, ITsConfigLoader } from './TsConfigLoader';
 
