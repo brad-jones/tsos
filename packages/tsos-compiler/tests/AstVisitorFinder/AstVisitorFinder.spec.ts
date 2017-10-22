@@ -24,22 +24,20 @@ export class AstVisitorFinderFixture
     }
 
     @AsyncTest()
-    @Timeout(1000)
-    public async FindFromNpmPackages()
+    public async FindFromTsConfig()
     {
         let finder = new AstVisitorFinder();
-        let result = await finder.FindFromNpmPackages(`${__dirname}/../../../../`);
+        let result = await finder.FindFromTsConfig(`${__dirname}/../../../../tsconfig.json`);
         Expect(Array.isArray(result)).toBeTruthy();
         Expect(result.length).toBe(1);
         result.forEach(_ => Expect(typeof _).toEqual("function"));
     }
 
     @Test()
-    @Timeout(1000)
-    public FindFromNpmPackagesSync()
+    public FindFromTsConfigSync()
     {
         let finder = new AstVisitorFinder();
-        let result = finder.FindFromNpmPackagesSync(`${__dirname}/../../../../`);
+        let result = finder.FindFromTsConfigSync(`${__dirname}/../../../../tsconfig.json`);
         Expect(Array.isArray(result)).toBeTruthy();
         Expect(result.length).toBe(1);
         result.forEach(_ => Expect(typeof _).toEqual("function"));

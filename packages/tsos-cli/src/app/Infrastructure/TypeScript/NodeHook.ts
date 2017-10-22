@@ -87,14 +87,13 @@ export class NodeHook
 
         if (!this.noVisitors)
         {
-            astVisitors.push(...this.astVisitorsFromCli);
-            if (config.options.configFilePath)
+            if (this.astVisitorsFromCli.length > 0)
             {
-                astVisitors.push(...this.astVisitorFinder.FindFromNpmPackagesSync(path.dirname(config.options.configFilePath as string)));
+                astVisitors = this.astVisitorsFromCli;
             }
-            else
+            else if (config.options.configFilePath)
             {
-                astVisitors.push(...this.astVisitorFinder.FindFromNpmPackagesSync(path.dirname(filename)));
+                astVisitors = this.astVisitorFinder.FindFromTsConfigSync(config.options.configFilePath as string);
             }
         }
 

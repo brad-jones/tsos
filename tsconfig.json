@@ -10,5 +10,10 @@
                 "./tsos-cli/src/app/*"
             ]
         }
+    },
+    "tsos": {
+        "visitors": [
+            "./packages/tsos-visitors/dist/visitors/**/*.js"
+        ]
     }
 }

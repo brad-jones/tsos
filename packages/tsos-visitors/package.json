@@ -32,11 +32,6 @@
         "tap-xunit": "^1.7.0",
         "typescript": "^2.5.3"
     },
-    "tsos": {
-        "visitors": [
-            "./dist/visitors/**/*.js"
-        ]
-    },
     "publishConfig": {
         "access": "public"
     }

@@ -46,12 +46,16 @@ export default class Build implements ICommand
         // Configure the intial ast
         await this.tsOsCompiler.ConfigureAst(normalisedProjectPath, this.tsCliParser.ParseTsOptions(options.tsOptions).options);
 
-        // Load up visitors provided by command line and any discovered visitors from installed npm packages.
-        await Promise.all
-        ([
-            this.tsOsCompiler.AddAstVisitors(normalisedVisitors),
-            this.tsOsCompiler.AddAstVisitors(path.dirname(normalisedProjectPath))
-        ]);
+        // Load up visitors provided by command line or
+        // any discovered visitors from tsconfig.
+        if (normalisedVisitors.length > 0)
+        {
+            await this.tsOsCompiler.AddAstVisitors(normalisedVisitors);
+        }
+        else
+        {
+            await this.tsOsCompiler.AddAstVisitors(normalisedProjectPath);
+        }
 
         // Run the compilation
         let result = await this.tsOsCompiler.Emit();

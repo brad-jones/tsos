@@ -1,12 +1,13 @@
 import * as fs from 'mz/fs';
 import * as path from 'path';
 import * as ts from 'typescript';
-import { injectable } from 'inversify';
 import { Implements } from './Decorators';
 import deasync = require('deasync-promise');
 import { IAstVisitor } from './IAstVisitor';
 import requireGlob = require('require-glob');
 import globPromise = require('glob-promise');
+import { inject, injectable } from 'inversify';
+import { TsConfigLoader, ITsConfigLoader } from './TsConfigLoader';
 
 export let IAstVisitorFinder = Symbol(__filename);
 
@@ -27,24 +28,38 @@ export interface IAstVisitorFinder
     FindByGlobSync(globPaths: string[]): IAstVisitor[];
 
     /**
-     * Discovers `IAstVisitor` modules from NPM Packages.
+     * Discovers `IAstVisitor` modules from a TsConfig file path.
      *
-     * - `basePath` a folder than contains a `package.json`
-     *    or a `node_modules` folder.
+     * Visitors are found by looking for a `tsos.visitors` array of file globs
+     * in the tsconfig file. This method will recursively follow any `extends`
+     * and continue looking for `tsos.visitors` keys.
      *
-     * Visitors are found by first looking for a `package.json` file in the
-     * provided `basePath`, if that file defines a `tsos.visitors` array of
-     * glob patterns, each glob pattern is passed to `FindByGlob`, the
+     * Each glob pattern is passed to `FindByGlob`, the
      * resulting exports are added to the visitors array.
-     *
-     * We then recurse into `node_modules` and repeat.
      */
-    FindFromNpmPackages(basePath: string): Promise<IAstVisitor[]>;
+    FindFromTsConfig(tsConfigFilePath: string): Promise<IAstVisitor[]>;
 
     /**
-     * Does exactly the same thing as `FindFromNpmPackages` but synchronously.
+     * Discovers `IAstVisitor` modules from a `ts.ParsedCommandLine` object.
+     *
+     * Visitors are found by looking for a `tsos.visitors` array of file globs
+     * in the tsconfig file. This method will recursively follow any `extends`
+     * and continue looking for `tsos.visitors` keys.
+     *
+     * Each glob pattern is passed to `FindByGlob`, the
+     * resulting exports are added to the visitors array.
      */
-    FindFromNpmPackagesSync(basePath: string): IAstVisitor[];
+    FindFromTsConfig(tsConfig: ts.ParsedCommandLine): Promise<IAstVisitor[]>;
+
+    /**
+     * Does exactly the same thing as `FindFromTsConfig` but synchronously.
+     */
+    FindFromTsConfigSync(tsConfigFilePath: string): IAstVisitor[];
+
+    /**
+     * Does exactly the same thing as `FindFromTsConfig` but synchronously.
+     */
+    FindFromTsConfigSync(tsConfig: ts.ParsedCommandLine): IAstVisitor[];
 }
 
 export interface IStaticAstVisitorFinder
@@ -56,6 +71,14 @@ export interface IStaticAstVisitorFinder
 @Implements<IStaticAstVisitorFinder>()
 export class AstVisitorFinder
 {
+    public constructor
+    (
+        @inject(ITsConfigLoader) protected tsConfigLoader: ITsConfigLoader = null
+    ){
+        // Make this class non di friendly
+        if (tsConfigLoader === null) this.tsConfigLoader = new TsConfigLoader();
+    }
+
     public async FindByGlob(globPaths: string[]): Promise<IAstVisitor[]>
     {
         let results = await requireGlob
@@ -81,46 +104,54 @@ export class AstVisitorFinder
         return deasync(this.FindByGlob(globPaths));
     }
 
-    public async FindFromNpmPackages(basePath: string): Promise<IAstVisitor[]>
+    public async FindFromTsConfig(arg: string | ts.ParsedCommandLine): Promise<IAstVisitor[]>
     {
-        let visitorsArray: IAstVisitor[] = [];
+        let visitors: IAstVisitor[] = [];
 
-        let pkg;
-        try { pkg = require(path.join(basePath, 'package.json')); }
-        catch (e) { /* siliently fail and move on */ }
-
-        if (pkg && pkg.tsos && pkg.tsos.visitors instanceof Array)
+        let tsConfig: ts.ParsedCommandLine;
+        if (typeof arg === 'string')
         {
-            let globs = (pkg.tsos.visitors as Array<string>).map(glob => path.join(basePath, glob));
-            let visitors = await this.FindByGlob(globs);
-            visitorsArray.push(...visitors);
+            tsConfig = await this.tsConfigLoader.LoadConfig(arg);
+        }
+        else
+        {
+            tsConfig = arg;
         }
 
-        let pkgFolders: string[] = [];
-        let nodeModules = path.join(basePath, 'node_modules');
-        try { pkgFolders = await fs.readdir(nodeModules); }
-        catch (e) { /* siliently fail and move on */ }
-
-        for (let pkgFolder of pkgFolders.filter(f => fs.statSync(path.join(nodeModules, f)).isDirectory()))
+        if (tsConfig.raw.extends)
         {
-            if (pkgFolder.startsWith('@'))
+            let extend: string = tsConfig.raw.extends;
+            if (!extend.startsWith('/'))
             {
-                for (let orgFolder of (await fs.readdir(path.join(nodeModules, pkgFolder))).filter(f => fs.statSync(path.join(nodeModules, pkgFolder, f)).isDirectory()))
-                {
-                    visitorsArray.push(...await this.FindFromNpmPackages(path.join(nodeModules, pkgFolder, orgFolder)));
-                }
+                extend = path.join
+                (
+                    path.dirname(tsConfig.options.configFilePath as string),
+                    extend
+                );
             }
-            else
-            {
-                visitorsArray.push(...await this.FindFromNpmPackages(path.join(nodeModules, pkgFolder)));
-            }
+
+            visitors.push(...await this.FindFromTsConfig(extend));
         }
 
-        return visitorsArray;
+        if (tsConfig.raw.tsos && Array.isArray(tsConfig.raw.tsos.visitors))
+        {
+            visitors.push(...await this.FindByGlob
+            (
+                (tsConfig.raw.tsos.visitors as string[]).map(glob =>
+                    glob.startsWith('/') ? glob : path.join
+                    (
+                        path.dirname(tsConfig.options.configFilePath as string),
+                        glob
+                    )
+                )
+            ));
+        }
+
+        return visitors;
     }
 
-    public FindFromNpmPackagesSync(basePath: string): IAstVisitor[]
+    public FindFromTsConfigSync(arg: string | ts.ParsedCommandLine): IAstVisitor[]
     {
-        return deasync(this.FindFromNpmPackages(basePath));
+        return deasync(this.FindFromTsConfig(arg));
     }
 }

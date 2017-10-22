@@ -210,22 +210,22 @@ export class TsOsCompilerFixture
     }
 
     @AsyncTest()
-    public async AddAstVisitorsWithBasePath()
+    public async AddAstVisitorsWithTsConfigPath()
     {
         let compiler = new TsOsCompiler();
-        SpyOn(compiler['astVisitorFinder'], 'FindFromNpmPackages');
-        await compiler.AddAstVisitors(`${__dirname}/../../../..`);
-        Expect(compiler['astVisitorFinder']['FindFromNpmPackages']).toHaveBeenCalledWith(`${__dirname}/../../../..`);
+        SpyOn(compiler['astVisitorFinder'], 'FindFromTsConfig');
+        await compiler.AddAstVisitors(`${__dirname}/../../../../tsconfig.json`);
+        Expect(compiler['astVisitorFinder']['FindFromTsConfig']).toHaveBeenCalledWith(`${__dirname}/../../../../tsconfig.json`);
         compiler['astVisitors'].forEach(_ => Expect(typeof _).toBe('function'));
     }
 
     @Test()
-    public async AddAstVisitorsWithBasePathSync()
+    public async AddAstVisitorsWithTsConfigPathSync()
     {
         let compiler = new TsOsCompiler();
-        SpyOn(compiler['astVisitorFinder'], 'FindFromNpmPackages');
-        compiler.AddAstVisitorsSync(`${__dirname}/../../../..`);
-        Expect(compiler['astVisitorFinder']['FindFromNpmPackages']).toHaveBeenCalledWith(`${__dirname}/../../../..`);
+        SpyOn(compiler['astVisitorFinder'], 'FindFromTsConfig');
+        compiler.AddAstVisitorsSync(`${__dirname}/../../../../tsconfig.json`);
+        Expect(compiler['astVisitorFinder']['FindFromTsConfig']).toHaveBeenCalledWith(`${__dirname}/../../../../tsconfig.json`);
         compiler['astVisitors'].forEach(_ => Expect(typeof _).toBe('function'));
     }
 
@@ -234,10 +234,10 @@ export class TsOsCompilerFixture
     {
         let compiler = new TsOsCompiler();
         SpyOn(compiler['astVisitorFinder'], 'FindByGlob');
-        SpyOn(compiler['astVisitorFinder'], 'FindFromNpmPackages');
+        SpyOn(compiler['astVisitorFinder'], 'FindFromTsConfig');
         await compiler.AddAstVisitors(['./foo/bar/**/*.js']);
         Expect(compiler['astVisitorFinder']['FindByGlob']).toHaveBeenCalledWith(Any(Array));
-        Expect(compiler['astVisitorFinder']['FindFromNpmPackages']).not.toHaveBeenCalled();
+        Expect(compiler['astVisitorFinder']['FindFromTsConfig']).not.toHaveBeenCalled();
         compiler['astVisitors'].forEach(_ => Expect(typeof _).toBe('function'));
     }
 
@@ -246,10 +246,10 @@ export class TsOsCompilerFixture
     {
         let compiler = new TsOsCompiler();
         SpyOn(compiler['astVisitorFinder'], 'FindByGlob');
-        SpyOn(compiler['astVisitorFinder'], 'FindFromNpmPackages');
+        SpyOn(compiler['astVisitorFinder'], 'FindFromTsConfig');
         compiler.AddAstVisitorsSync(['./foo/bar/**/*.js']);
         Expect(compiler['astVisitorFinder']['FindByGlob']).toHaveBeenCalledWith(Any(Array));
-        Expect(compiler['astVisitorFinder']['FindFromNpmPackages']).not.toHaveBeenCalled();
+        Expect(compiler['astVisitorFinder']['FindFromTsConfig']).not.toHaveBeenCalled();
         compiler['astVisitors'].forEach(_ => Expect(typeof _).toBe('function'));
     }
 
@@ -258,10 +258,10 @@ export class TsOsCompilerFixture
     {
         let compiler = new TsOsCompiler();
         SpyOn(compiler['astVisitorFinder'], 'FindByGlob');
-        SpyOn(compiler['astVisitorFinder'], 'FindFromNpmPackages');
+        SpyOn(compiler['astVisitorFinder'], 'FindFromTsConfig');
         await compiler.AddAstVisitors([() => {}]);
         Expect(compiler['astVisitorFinder']['FindByGlob']).not.toHaveBeenCalled();
-        Expect(compiler['astVisitorFinder']['FindFromNpmPackages']).not.toHaveBeenCalled();
+        Expect(compiler['astVisitorFinder']['FindFromTsConfig']).not.toHaveBeenCalled();
         compiler['astVisitors'].forEach(_ => Expect(typeof _).toBe('function'));
     }
 
@@ -270,10 +270,10 @@ export class TsOsCompilerFixture
     {
         let compiler = new TsOsCompiler();
         SpyOn(compiler['astVisitorFinder'], 'FindByGlob');
-        SpyOn(compiler['astVisitorFinder'], 'FindFromNpmPackages');
+        SpyOn(compiler['astVisitorFinder'], 'FindFromTsConfig');
         compiler.AddAstVisitorsSync([() => {}]);
         Expect(compiler['astVisitorFinder']['FindByGlob']).not.toHaveBeenCalled();
-        Expect(compiler['astVisitorFinder']['FindFromNpmPackages']).not.toHaveBeenCalled();
+        Expect(compiler['astVisitorFinder']['FindFromTsConfig']).not.toHaveBeenCalled();
         compiler['astVisitors'].forEach(_ => Expect(typeof _).toBe('function'));
     }
 

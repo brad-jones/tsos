@@ -22,10 +22,10 @@ export interface ITsOsCompiler
     ConfigureAstSync(tsConfigFilePath: string, additionalCompilerOptions?: ts.CompilerOptions, autoAddSrcFiles?: boolean): void;
     ConfigureAstSync(parsedTsConfig: ts.ParsedCommandLine, additionalCompilerOptions?: ts.CompilerOptions, autoAddSrcFiles?: boolean): void;
     AddSrcFiles(fileGlobs: string[]): void;
-    AddAstVisitors(basePath: string): Promise<void>;
+    AddAstVisitors(tsConfigFilePath: string): Promise<void>;
     AddAstVisitors(globs: string[]): Promise<void>;
     AddAstVisitors(visitors: IAstVisitor[]): Promise<void>;
-    AddAstVisitorsSync(basePath: string): void;
+    AddAstVisitorsSync(tsConfigFilePath: string): void;
     AddAstVisitorsSync(globs: string[]): void;
     AddAstVisitorsSync(visitors: IAstVisitor[]): void;
     Emit(emitOptions?: EmitOptions): Promise<EmitResult>;
@@ -127,7 +127,7 @@ export class TsOsCompiler
         this.ast.addSourceFiles.apply(this.ast, fileGlobs);
     }
 
-    public AddAstVisitors(basePath: string): Promise<void>;
+    public AddAstVisitors(tsConfigFilePath: string): Promise<void>;
     public AddAstVisitors(globs: string[]): Promise<void>;
     public AddAstVisitors(visitors: IAstVisitor[]): Promise<void>;
     public async AddAstVisitors(...args): Promise<void>
@@ -148,14 +148,14 @@ export class TsOsCompiler
 
         if (typeof args[0] === 'string')
         {
-            this.astVisitors.push(...await this.astVisitorFinder.FindFromNpmPackages(args[0]));
+            this.astVisitors.push(...await this.astVisitorFinder.FindFromTsConfig(args[0]));
             return;
         }
 
         throw new Error('Invalid parameters provided!');
     }
 
-    public AddAstVisitorsSync(basePath: string): void;
+    public AddAstVisitorsSync(tsConfigFilePath: string): void;
     public AddAstVisitorsSync(globs: string[]): void;
     public AddAstVisitorsSync(visitors: IAstVisitor[]): void;
     public AddAstVisitorsSync(...args): void
