@@ -10,7 +10,7 @@
         "clean": "shx rm -rf ./dist; shx rm -rf ./.nyc_output",
         "build": "tsc -p tsconfig.build.json",
         "test": "../tsos-cli/dist/index.js runner ./tests/runner.ts --no-visitors",
-        "cover": "nyc --exclude \"tests/**\" --report-dir ../../test-results/tsos-compiler/coverage --reporter=html --reporter=clover yarn test; nyc report --report-dir ../../test-results/tsos-compiler/coverage;"
+        "cover": "nyc --exclude \"tests/**\" --report-dir ../../test-results/tsos-compiler/coverage --reporter=html --reporter=clover yarn test"
     },
     "dependencies": {
         "deasync-promise": "^1.0.1",
