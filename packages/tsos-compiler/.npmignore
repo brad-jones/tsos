@@ -1,0 +1,5 @@
+.npmignore
+.nyc_output
+src
+tests
+tsconfig.build.json
