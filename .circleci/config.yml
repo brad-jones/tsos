@@ -21,4 +21,6 @@ jobs:
       - run: bash <(curl -s https://codecov.io/bash) -s 'test-results/*/coverage'
       - deploy:
           command: |
-            echo 'Does this run if tests fail?'
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              npm run release
+            fi
