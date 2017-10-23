@@ -1,6 +1,6 @@
 {
     "name": "@brad-jones/tsos-compiler",
-    "version": "2.0.0-rc.3",
+    "version": "2.0.0",
     "description": "An extendable typescript compiler, based on ts-simple-ast.",
     "author": "Brad Jones <brad@bjc.id.au>",
     "license": "MIT",
