@@ -8,7 +8,7 @@
         "commit": "commit",
         "commitmsg": "commitlint -e",
         "clean": "lerna clean --yes; lerna run clean --parallel; shx rm -rf ./test-results",
-        "build": "lerna run build; lerna bootstrap;",
+        "build": "lerna bootstrap; lerna run build;",
         "rebuild": "yarn run clean; yarn run build;",
         "watch": "nodemon -e ts,js,json,env -i dist/ -i tests/ -x 'yarn run rebuild'",
         "test": "lerna run test --parallel --stream;",
