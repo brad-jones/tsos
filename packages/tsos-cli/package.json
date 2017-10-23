@@ -1,0 +1,47 @@
+{
+    "name": "@brad-jones/tsos-cli",
+    "version": "2.0.0-rc.3",
+    "description": "Provides a cli interface for the tsos-compiler.",
+    "author": "Brad Jones <brad@bjc.id.au>",
+    "license": "MIT",
+    "bin": {
+        "tsos": "./dist/index.js"
+    },
+    "scripts": {
+        "clean": "shx rm -rf ./dist; shx rm -rf ./.nyc_output",
+        "build": "tsc -p tsconfig.build.json; shx chmod +x ./dist/index.js",
+        "test": "echo 'Tests Comming Soon :)';",
+        "cover": "echo 'Tests Comming Soon :)';"
+    },
+    "dependencies": {
+        "@brad-jones/tsos-compiler": "^2.0.0-rc.3",
+        "caporal": "^0.8.0",
+        "change-case": "^3.0.1",
+        "inversify": "^4.3.0",
+        "node-hook": "^1.0.0",
+        "reflect-metadata": "^0.1.10",
+        "replace-in-file": "^3.0.0-beta.2",
+        "require-glob": "^3.2.0",
+        "shelljs": "^0.7.8",
+        "source-map-support": "^0.5.0",
+        "tslib": "^1.7.1",
+        "xxhashjs": "^0.2.1"
+    },
+    "peerDependencies": {
+        "typescript": "^2.5.3"
+    },
+    "devDependencies": {
+        "@types/node": "^8.0.33",
+        "@types/shelljs": "^0.7.4",
+        "@types/source-map-support": "^0.4.0",
+        "@types/xxhashjs": "^0.1.1",
+        "alsatian": "^2.0.0",
+        "nyc": "^11.2.1",
+        "shx": "^0.2.2",
+        "tap-xunit": "^1.7.0",
+        "typescript": "^2.5.3"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
+}

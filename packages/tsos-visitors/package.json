@@ -1,0 +1,38 @@
+{
+    "name": "@brad-jones/tsos-visitors",
+    "version": "2.0.0-rc.3",
+    "description": "A collection of core visitors used by the tsos ecosystem.",
+    "author": "Brad Jones <brad@bjc.id.au>",
+    "license": "MIT",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "scripts": {
+        "clean": "shx rm -rf ./dist; shx rm -rf ./.nyc_output",
+        "build": "tsc -p tsconfig.build.json",
+        "test": "../tsos-cli/dist/index.js runner ./tests/runner.ts --no-visitors",
+        "cover": "nyc --exclude \"tests/**\" --report-dir ../../test-results/tsos-visitors/coverage --reporter=html --reporter=clover yarn test"
+    },
+    "dependencies": {
+        "ts-simple-ast": "^0.77.0",
+        "tslib": "^1.7.1"
+    },
+    "peerDependencies": {
+        "typescript": "^2.5.3"
+    },
+    "devDependencies": {
+        "@brad-jones/tsos-compiler": "^2.0.0-rc.3",
+        "@types/mz": "^0.0.32",
+        "@types/node": "^8.0.33",
+        "@types/shelljs": "^0.7.4",
+        "alsatian": "^2.0.0",
+        "mz": "^2.7.0",
+        "nyc": "^11.2.1",
+        "shx": "^0.2.2",
+        "tap-spec": "^4.1.1",
+        "tap-xunit": "^1.7.0",
+        "typescript": "^2.5.3"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
+}

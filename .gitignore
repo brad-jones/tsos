@@ -1,7 +1,5 @@
 dist
-tests/*.js
-tests/*.js.map
-tests/output
-!tests/rollup.config.js
 node_modules
-npm-debug.log
+test-results
+.nyc_output
+*.log

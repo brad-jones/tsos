@@ -1,18 +1,19 @@
 {
-    "include": ["./src"],
+    "extends": "./tsconfig.base.json",
     "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "declaration": true,
-        "importHelpers": true,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "removeComments": true,
-        "preserveConstEnums": true,
-        "suppressImplicitAnyIndexErrors": true,
-        "sourceMap": true,
-        "inlineSources": true,
-        "types": ["node"]
+        "baseUrl": "./packages",
+        "paths": {
+            "@brad-jones/*": [
+                "./*/src"
+            ],
+            "app/*": [
+                "./tsos-cli/src/app/*"
+            ]
+        }
+    },
+    "tsos": {
+        "visitors": [
+            "./packages/tsos-visitors/dist/visitors/**/*.js"
+        ]
     }
 }

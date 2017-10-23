@@ -1,0 +1,26 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          key: dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+      - run: yarn build
+      - run: yarn cover
+      - store_test_results:
+          path: ~/project/test-results
+      - store_artifacts:
+          path: ~/project/test-results
+      - run: bash <(curl -s https://codecov.io/bash) -s 'test-results/*/coverage'
+      - deploy:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              npm run release
+            fi
