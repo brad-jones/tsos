@@ -19,3 +19,4 @@ jobs:
       - store_artifacts:
           path: ~/project/test-results
       - run: bash <(curl -s https://codecov.io/bash) -s 'test-results/*/coverage'
+      - deploy: echo 'Does this run if tests fail?'
