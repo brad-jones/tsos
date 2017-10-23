@@ -167,9 +167,11 @@ export class TsOsCompiler
     public Emit(srcFiles: string[], emitOptions?: EmitOptions): Promise<Map<string, EmitResult>>;
     public async Emit(...args): Promise<any>
     {
+        let ctx = {};
+
         for (let visitor of this.astVisitors)
         {
-            let possiblePromise = visitor(this.ast);
+            let possiblePromise = visitor(this.ast, ctx);
 
             if (possiblePromise instanceof Promise)
             {

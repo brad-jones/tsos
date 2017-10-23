@@ -4,5 +4,5 @@ export let IAstVisitor = Symbol();
 
 export interface IAstVisitor
 {
-    (ast: TsSimpleAst): void | Promise<void>;
+    (ast: TsSimpleAst, ctx?: { [name: string]: any }): void | Promise<void>;
 }
