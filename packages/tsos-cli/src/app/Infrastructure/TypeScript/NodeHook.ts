@@ -52,23 +52,26 @@ export class NodeHook
 
     public Register(tsCliOptions: string[], astVisitorGlobs: string[] | boolean = [], transpilationCache = true): void
     {
+        shell.mkdir('-p', NodeHook.cacheDir);
         this.transpiledFiles = new Map<string, string>();
         this.transpilationCache = transpilationCache;
+        this.cliConfig = this.tsCliParser.ParseTsOptions(tsCliOptions);
+        this.cliConfigString = JSON.stringify(this.cliConfig);
+        nodeHook.hook('.ts', this.Transpile.bind(this));
+        sourceMapSupport({ environment: 'node', retrieveSourceMap: this._retrieveSourceMap.bind(this) });
 
+        // We add visitors after registering the actual hook as it is
+        // possible that visitors may need compilation themselves.
         if (Array.isArray(astVisitorGlobs))
         {
+            this.noVisitors = true;
             this.astVisitorsFromCli = this.astVisitorFinder.FindByGlobSync(astVisitorGlobs);
+            this.noVisitors = false;
         }
         else
         {
             this.noVisitors = true;
         }
-
-        this.cliConfig = this.tsCliParser.ParseTsOptions(tsCliOptions);
-        this.cliConfigString = JSON.stringify(this.cliConfig);
-        nodeHook.hook('.ts', this.Transpile.bind(this));
-        sourceMapSupport({ environment: 'node', retrieveSourceMap: this._retrieveSourceMap.bind(this) });
-        shell.mkdir('-p', NodeHook.cacheDir);
     }
 
     public Transpile(source: string, filename: string): string
@@ -93,7 +96,9 @@ export class NodeHook
             }
             else if (config.options.configFilePath)
             {
+                this.noVisitors = true;
                 astVisitors = this.astVisitorFinder.FindFromTsConfigSync(config.options.configFilePath as string);
+                this.noVisitors = false;
             }
         }
 

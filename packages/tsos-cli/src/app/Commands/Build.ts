@@ -5,6 +5,7 @@ import { ICommand } from 'app/Commands/ICommand';
 import { ITsOsCompiler } from '@brad-jones/tsos-compiler';
 import { ILogger } from 'app/Infrastructure/Logging/ILogger';
 import { ICaporalConfig } from 'app/Infrastructure/ICaporalConfig';
+import { INodeHook } from 'app/Infrastructure/TypeScript/NodeHook';
 import { ICommandLineParser } from 'app/Infrastructure/TypeScript/CommandLineParser';
 
 export interface ICmdArguments
@@ -23,6 +24,7 @@ export default class Build implements ICommand
 {
     public constructor
     (
+        @inject(INodeHook) private nodeHook: INodeHook,
         @inject(ITsOsCompiler) private tsOsCompiler: ITsOsCompiler,
         @inject(ICommandLineParser) private tsCliParser: ICommandLineParser
     ){}
@@ -45,6 +47,12 @@ export default class Build implements ICommand
 
         // Configure the intial ast
         await this.tsOsCompiler.ConfigureAst(normalisedProjectPath, this.tsCliParser.ParseTsOptions(options.tsOptions).options);
+
+        // It is possible that visitors themselves may well be TypeScript files
+        // that need compilation first so we register the NodeHook here as well
+        // but visitors will get transpiled without any visitors otherwise we
+        // find ourselves in circular dependecy problem.
+        this.nodeHook.Register(options.tsOptions, false);
 
         // Load up visitors provided by command line or
         // any discovered visitors from tsconfig.
