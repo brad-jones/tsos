@@ -24,6 +24,6 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               git config --global user.email "$GIT_EMAIL"
               git config --global user.name "$GIT_NAME"
-              echo -e "$NPM_USERNAME\n$NPM_PASSWORD\n$NPM_EMAIL" | npm login
+              echo -e "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
               npm run release
             fi
