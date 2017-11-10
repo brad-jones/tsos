@@ -1,6 +1,6 @@
 {
     "name": "@brad-jones/tsos-visitors",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "description": "A collection of core visitors used by the tsos ecosystem.",
     "author": "Brad Jones <brad@bjc.id.au>",
     "repository": "brad-jones/tsos",
@@ -21,7 +21,7 @@
         "typescript": "^2.5.3"
     },
     "devDependencies": {
-        "@brad-jones/tsos-compiler": "2.1.0",
+        "@brad-jones/tsos-compiler": "2.1.1",
         "@types/mz": "^0.0.32",
         "@types/node": "^8.0.33",
         "@types/shelljs": "^0.7.4",

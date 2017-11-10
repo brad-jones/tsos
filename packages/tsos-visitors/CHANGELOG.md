@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.3"></a>
+## [2.0.3](https://github.com/brad-jones/tsos/compare/@brad-jones/tsos-visitors@2.0.2...@brad-jones/tsos-visitors@2.0.3) (2017-11-10)
+
+
+
+
+**Note:** Version bump only for package @brad-jones/tsos-visitors
+
 <a name="2.0.2"></a>
 ## [2.0.2](https://github.com/brad-jones/tsos/compare/@brad-jones/tsos-visitors@2.0.1...@brad-jones/tsos-visitors@2.0.2) (2017-10-23)
 
