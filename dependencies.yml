@@ -1,6 +1,6 @@
 collectors:
+- type: js-lerna
+  path: /
+  actors:
   - type: js-lerna
-    path: /
-    actors:
-    - type: js-lerna
-      versions: Y.Y.Y
+    versions: Y.Y.Y
