@@ -4,7 +4,6 @@
         "packages/*"
     ],
     "scripts": {
-        "lerna": "lerna",
         "commit": "commit",
         "commitmsg": "commitlint -e",
         "clean": "lerna clean --yes; lerna run clean --parallel; shx rm -rf ./test-results",
@@ -22,8 +21,8 @@
         "@commitlint/prompt-cli": "^4.2.1",
         "axios": "^0.17.1",
         "github-release-cli": "^0.3.0",
+        "glob": "^7.1.2",
         "husky": "^0.14.3",
-        "lerna": "^2.3.1",
         "lodash": "^4.17.4",
         "nodemon": "^1.12.1",
         "shx": "^0.2.2"

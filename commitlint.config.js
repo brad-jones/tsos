@@ -1,20 +1,6 @@
-const Repository = require('lerna/lib/Repository');
-const PackageUtilities = require('lerna/lib/PackageUtilities');
-
-function getPackages()
-{
-    let repo = new Repository(__dirname);
-
-    let packages = PackageUtilities.getPackages
-    ({
-        rootPath: __dirname, packageConfigs: repo.packageConfigs
-    });
-
-    packages = packages.map(pkg => pkg.name).map(name => (name.charAt(0) === '@' ? name.split('/')[1] : name));
-    packages.push('solution');
-
-    return packages;
-}
+const fs = require('fs');
+const path = require('path');
+const glob = require('glob');
 
 module.exports =
 {
@@ -22,7 +8,26 @@ module.exports =
     [
         '@commitlint/config-angular'
     ],
-    rules: {
-        'scope-enum': () => [2, 'always', getPackages()]
+    rules:
+    {
+        'scope-enum': () => [2, 'always', (() =>
+        {
+            let scopes = ['solution'];
+
+            let pkg = require(path.join(__dirname, 'package.json'));
+
+            for (let workspaceGlob of pkg.workspaces)
+            {
+                let packagePaths = glob.sync(path.join(__dirname, workspaceGlob));
+
+                for (let packagePath of packagePaths)
+                {
+                    let segments = packagePath.split('/');
+                    scopes.push(segments[segments.length - 1]);
+                }
+            }
+
+            return scopes;
+        })()]
     }
 };
