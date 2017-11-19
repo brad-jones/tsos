@@ -12,7 +12,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **solution:** Update ts-simple-ast from 0.89.0 to 0.94.0 ([#11](https://github.com/brad-jones/tsos/issues/11)) ([087d0c3](https://github.com/brad-jones/tsos/commit/087d0c3))
 
 
-
+<a name="5.1.1"></a>
+## [5.1.1](https://github.com/brad-jones/tsos/compare/v5.1.0...v5.1.1) (2017-11-19)
 
 <a name="5.1.0"></a>
 # [5.1.0](https://github.com/brad-jones/tsos/compare/v5.0.1...v5.1.0) (2017-11-19)
