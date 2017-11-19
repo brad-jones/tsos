@@ -1,6 +1,6 @@
 {
     "name": "@brad-jones/tsos-cli",
-    "version": "2.1.2",
+    "version": "5.0.0",
     "description": "Provides a cli interface for the tsos-compiler.",
     "author": "Brad Jones <brad@bjc.id.au>",
     "repository": "brad-jones/tsos",
@@ -15,7 +15,7 @@
         "cover": "echo 'Tests Comming Soon :)';"
     },
     "dependencies": {
-        "@brad-jones/tsos-compiler": "2.1.1",
+        "@brad-jones/tsos-compiler": "5.0.0",
         "caporal": "^0.8.0",
         "change-case": "^3.0.1",
         "inversify": "^4.3.0",
