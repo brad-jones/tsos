@@ -4,6 +4,9 @@ import { TypeGuards, DecoratableNode } from 'ts-simple-ast';
 
 export function reflectable(constructor: Function){}
 
+
+//
+
 let InsertReflectableDecorator: IAstVisitor = (ast) =>
 {
     ast.getSourceFiles().filter(_ => !_.getFilePath().includes('.d.ts')).forEach(srcFile =>
