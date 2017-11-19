@@ -1,6 +1,8 @@
 collectors:
 - type: js-lerna
-  path: /
+  path: /  # directory where lerna.json is located
   actors:
   - type: js-lerna
-    versions: Y.Y.Y
+    versions: L.Y.Y  # pull requests for minor and patch updates
+  - type: repo-issue
+    versions: Y.0.0  # issues for discussion of new major versions
