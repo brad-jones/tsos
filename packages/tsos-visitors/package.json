@@ -23,7 +23,7 @@
     "devDependencies": {
         "@brad-jones/tsos-compiler": "^5.1.0",
         "@types/mz": "^0.0.32",
-        "@types/node": "^8.0.33",
+        "@types/node": "^8.0.53",
         "@types/shelljs": "^0.7.4",
         "alsatian": "^2.0.0",
         "mz": "^2.7.0",
