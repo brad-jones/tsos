@@ -3640,6 +3640,16 @@ ts-simple-ast@^0.94.0:
     object-assign "^4.1.1"
     typescript "2.6.1"
 
+ts-simple-ast@^0.94.0:
+  version "0.94.0"
+  resolved "https://registry.yarnpkg.com/ts-simple-ast/-/ts-simple-ast-0.94.0.tgz#3d8c44b3408ded4b90f82d6874d83aeab2f97ffb"
+  dependencies:
+    code-block-writer "^5.0.0"
+    globby "^6.1.0"
+    minimatch "^3.0.4"
+    object-assign "^4.1.1"
+    typescript "2.6.1"
+
 tslib@^1.7.1:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.8.0.tgz#dc604ebad64bcbf696d613da6c954aa0e7ea1eb6"
