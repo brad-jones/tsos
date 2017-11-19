@@ -13,7 +13,7 @@
         "watch": "nodemon -e ts,js,json,env -i dist/ -i tests/ -x 'yarn run rebuild'",
         "test": "lerna run test --parallel --stream;",
         "cover": "lerna run cover --parallel --stream;",
-        "release": "lerna publish -m 'chore(solution): publish new version to npm' --exact --conventional-commits --yes"
+        "release": "lerna publish -m 'chore(solution): publish new version to npm' --conventional-commits --yes"
     },
     "devDependencies": {
         "@commitlint/cli": "^4.2.1",
