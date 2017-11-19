@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.1.3"></a>
+## [5.1.3](https://github.com/brad-jones/tsos/compare/v5.1.2...v5.1.3) (2017-11-19)
+
+
+### Bug Fixes
+
+* **tsos-visitors:** remove left over comment from experimentation ([075d996](https://github.com/brad-jones/tsos/commit/075d996))
+
+
+
+
 <a name="5.1.2"></a>
 ## [5.1.2](https://github.com/brad-jones/tsos/compare/v5.1.1...v5.1.2) (2017-11-19)
 
