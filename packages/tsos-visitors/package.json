@@ -1,6 +1,6 @@
 {
     "name": "@brad-jones/tsos-visitors",
-    "version": "3.0.0",
+    "version": "4.0.0",
     "description": "A collection of core visitors used by the tsos ecosystem.",
     "author": "Brad Jones <brad@bjc.id.au>",
     "repository": "brad-jones/tsos",
