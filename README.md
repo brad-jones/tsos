@@ -1,8 +1,9 @@
 # TypeScript on Steroids
-[![CircleCI](https://circleci.com/gh/brad-jones/tsos/tree/master.svg?style=svg)](https://circleci.com/gh/brad-jones/tsos/tree/develop)
+[![CircleCI](https://img.shields.io/circleci/project/github/brad-jones/tsos.svg)](https://circleci.com/gh/brad-jones/tsos/tree/master)
 [![codecov](https://codecov.io/gh/brad-jones/tsos/branch/master/graph/badge.svg)](https://codecov.io/gh/brad-jones/tsos)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
-[![TypeScript](https://badges.frapsoft.com/typescript/code/typescript.svg?v=101)](https://github.com/ellerbrock/typescript-badges/)
+[![dependencies.io](https://img.shields.io/badge/dependencies.io-updated-blue.svg)](https://dependencies.io)
+[![TypeScript](https://img.shields.io/badge/%3C/%3E-TypeScript-blue.svg)](https://www.typescriptlang.org/)
 
 __So if TypeScript is JavaScript on Steroids, this project is, well you get the idea...__
 
