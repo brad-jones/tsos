@@ -1,0 +1,6 @@
+collectors:
+  - type: js-lerna
+    path: /
+    actors:
+      - type: js-lerna
+        versions: "Y" # if it passes tests, I see no issues going all in
