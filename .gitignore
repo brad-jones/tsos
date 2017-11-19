@@ -67,3 +67,6 @@ dist/
 
 # Test Reports and Artifacts
 test-results/
+
+# Ignore vscode settings dir
+.vscode/
