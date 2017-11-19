@@ -4,3 +4,5 @@ collectors:
   actors:
   - type: js-lerna
     versions: Y.Y.Y
+    settings:
+      batch_mode: true
