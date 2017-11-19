@@ -26,9 +26,9 @@
         "typescript": "^2.5.3"
     },
     "devDependencies": {
-        "@types/lodash": "^4.14.77",
+        "@types/lodash": "^4.14.85",
         "@types/mz": "^0.0.32",
-        "@types/node": "^8.0.33",
+        "@types/node": "^8.0.53",
         "alsatian": "^2.0.0",
         "nyc": "^11.2.1",
         "shx": "^0.2.2",
