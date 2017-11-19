@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/brad-jones/tsos/compare/@brad-jones/tsos-visitors@2.0.4...@brad-jones/tsos-visitors@3.0.0) (2017-11-19)
+
+
+### Features
+
+* **tsos-visitors:** remove the bogus comment ([a92929d](https://github.com/brad-jones/tsos/commit/a92929d))
+
+
+### BREAKING CHANGES
+
+* **tsos-visitors:** removed the bogus comment
+
+
+
+
 <a name="2.0.4"></a>
 ## [2.0.4](https://github.com/brad-jones/tsos/compare/@brad-jones/tsos-visitors@2.0.3...@brad-jones/tsos-visitors@2.0.4) (2017-11-19)
 
