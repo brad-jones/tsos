@@ -4,12 +4,6 @@ import { TypeGuards, DecoratableNode } from 'ts-simple-ast';
 
 export function reflectable(constructor: Function){}
 
-/*
- * This is just a bogus test comment, I am till deciding if I want to continue
- * with lerna or not. And I playing with how releases / change log generation
- * is working.
- */
-
 let InsertReflectableDecorator: IAstVisitor = (ast) =>
 {
     ast.getSourceFiles().filter(_ => !_.getFilePath().includes('.d.ts')).forEach(srcFile =>
