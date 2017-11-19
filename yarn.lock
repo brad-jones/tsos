@@ -3626,16 +3626,6 @@ trim@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/trim/-/trim-0.0.1.tgz#5858547f6b290757ee95cccc666fb50084c460dd"
 
-ts-simple-ast@^0.89.0:
-  version "0.89.0"
-  resolved "https://registry.yarnpkg.com/ts-simple-ast/-/ts-simple-ast-0.89.0.tgz#82b80ef991b1a754c1348458d0c21d875c364235"
-  dependencies:
-    code-block-writer "^5.0.0"
-    globby "^6.1.0"
-    minimatch "^3.0.4"
-    object-assign "^4.1.1"
-    typescript "2.6.1"
-
 ts-simple-ast@^0.94.0:
   version "0.94.0"
   resolved "https://registry.yarnpkg.com/ts-simple-ast/-/ts-simple-ast-0.94.0.tgz#3d8c44b3408ded4b90f82d6874d83aeab2f97ffb"
