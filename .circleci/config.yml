@@ -42,7 +42,7 @@ jobs:
               git config --global user.email "$GIT_EMAIL"
               git config --global user.name "$GIT_NAME"
               echo -e "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
-              npm run release
+              npm run release || true
             fi
 
   upgrade:
