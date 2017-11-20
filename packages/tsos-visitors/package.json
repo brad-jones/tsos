@@ -11,7 +11,8 @@
         "clean": "shx rm -rf ./dist; shx rm -rf ./.nyc_output",
         "build": "tsc -p tsconfig.build.json; shx cp -R ./dist/tsos-visitors/**/* ./dist; shx rm -rf ./dist/tsos-*;",
         "test": "../tsos-cli/dist/index.js runner ./tests/runner.ts --no-visitors",
-        "cover": "nyc --exclude \"tests/**\" --report-dir ../../test-results/tsos-visitors/coverage --reporter=html --reporter=clover yarn test"
+        "cover": "nyc --exclude \"tests/**\" --report-dir ../../test-results/tsos-visitors/coverage --reporter=html --reporter=clover yarn test",
+        "upgrade-packages": "ncu --upgrade --upgradeAll --packageFile ./package.json --filter '/^(?!@brad-jones).*$/'"
     },
     "dependencies": {
         "@brad-jones/tsos-compiler": "0.0.0-semantically-released",
@@ -26,6 +27,7 @@
         "@types/node": "^8.0.53",
         "@types/shelljs": "^0.7.6",
         "alsatian": "^2.0.0",
+        "npm-check-updates": "^2.13.0",
         "mz": "^2.7.0",
         "nyc": "^11.2.1",
         "shx": "^0.2.2",

@@ -50,10 +50,16 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
+      - run: "! git branch -a | egrep \"remotes/origin/automated-package-upgrade\""
+      - run: yarn install
       - run: sha1sum yarn.lock > yarn.lock.sha1
-      - run: yarn upgrade
+      - run: yarn upgrade-packages
       - run: "! sha1sum -c yarn.lock.sha1"
-      - run: echo "This is where we create a PR";
+      - run: git checkout -b automated-package-upgrade
+      - run: git add .
+      - run: "git commit -m \"feat(solution): automated package upgrade\""
+      - run: git push -u origin automated-package-upgrade
+      - run: "node ./scripts/pr.js --title \"feat(solution): automated package upgrade\" --head automated-package-upgrade --base master"
 
   node-8.9.0:
     docker:

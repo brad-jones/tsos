@@ -12,7 +12,8 @@
         "clean": "shx rm -rf ./dist; shx rm -rf ./.nyc_output",
         "build": "tsc -p tsconfig.build.json; shx cp -R ./dist/tsos-cli/**/* ./dist; shx rm -rf ./dist/tsos-*; shx chmod +x ./dist/index.js",
         "test": "echo 'Tests Comming Soon :)';",
-        "cover": "echo 'Tests Comming Soon :)';"
+        "cover": "echo 'Tests Comming Soon :)';",
+        "upgrade-packages": "ncu --upgrade --upgradeAll --packageFile ./package.json --filter '/^(?!@brad-jones).*$/'"
     },
     "dependencies": {
         "@brad-jones/tsos-compiler": "0.0.0-semantically-released",
@@ -37,6 +38,7 @@
         "@types/source-map-support": "^0.4.0",
         "@types/xxhashjs": "^0.1.1",
         "alsatian": "^2.0.0",
+        "npm-check-updates": "^2.13.0",
         "nyc": "^11.2.1",
         "shx": "^0.2.2",
         "tap-xunit": "^1.7.0",

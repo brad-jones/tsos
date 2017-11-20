@@ -11,7 +11,8 @@
         "clean": "shx rm -rf ./dist; shx rm -rf ./.nyc_output",
         "build": "tsc -p tsconfig.build.json; shx cp -R ./dist/tsos-compiler/**/* ./dist; shx rm -rf ./dist/tsos-*;",
         "test": "../tsos-cli/dist/index.js runner ./tests/runner.ts --no-visitors",
-        "cover": "nyc --exclude \"tests/**\" --report-dir ../../test-results/tsos-compiler/coverage --reporter=html --reporter=clover yarn test"
+        "cover": "nyc --exclude \"tests/**\" --report-dir ../../test-results/tsos-compiler/coverage --reporter=html --reporter=clover yarn test",
+        "upgrade-packages": "ncu --upgrade --upgradeAll --packageFile ./package.json --filter '/^(?!@brad-jones).*$/'"
     },
     "dependencies": {
         "deasync-promise": "^1.0.1",
@@ -30,6 +31,7 @@
         "@types/mz": "^0.0.32",
         "@types/node": "^8.0.53",
         "alsatian": "^2.0.0",
+        "npm-check-updates": "^2.13.0",
         "nyc": "^11.2.1",
         "shx": "^0.2.2",
         "tap-spec": "^4.1.1",

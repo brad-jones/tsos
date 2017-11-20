@@ -12,7 +12,8 @@
         "watch": "nodemon -e ts,js,json,env -i dist/ -i tests/ -x 'yarn rebuild'",
         "test": "node ./scripts/workspaceRunner.js test",
         "cover": "node ./scripts/workspaceRunner.js cover",
-        "release": "node ./scripts/release.js"
+        "release": "node ./scripts/release.js",
+        "upgrade-packages": "ncu --upgrade --upgradeAll; node ./scripts/workspaceRunner.js upgrade-packages; yarn install"
     },
     "devDependencies": {
         "@commitlint/cli": "^4.2.1",
@@ -30,6 +31,8 @@
         "lodash": "^4.17.4",
         "mz": "^2.7.0",
         "nodemon": "^1.12.1",
+        "npm-check-updates": "^2.13.0",
+        "octonode": "^0.9.1",
         "semver": "^5.4.1",
         "shx": "^0.2.2",
         "typescript": "^2.6.1",
