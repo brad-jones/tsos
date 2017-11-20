@@ -39,7 +39,7 @@ jobs:
       - checkout
       - run: sha1sum yarn.lock > yarn.lock.sha1
       - run: yarn upgrade
-      - run: ! sha1sum -c yarn.lock.sha1
+      - run: "! sha1sum -c yarn.lock.sha1"
       - run: echo "This is where we create a PR";
 
 workflows:
