@@ -188,16 +188,24 @@ new Listr
             }
         },{
             title: 'Upload new github release',
-            task: (ctx) => execa(`${__dirname}/../node_modules/.bin/github-release`,
-            [
-                'upload',
-                '--owner', 'brad-jones',
-                '--repo', 'tsos',
-                '--tag', 'v' + ctx.nextVersion,
-                '--name', 'v' + ctx.nextVersion,
-                '--body', `${ctx.changeLog}`,
-                ctx.uploads && ctx.uploads.join(' ') || ''
-            ])
+            task: (ctx) =>
+            {
+                let args = [
+                    'upload',
+                    '--owner', 'brad-jones',
+                    '--repo', 'tsos',
+                    '--tag', 'v' + ctx.nextVersion,
+                    '--name', 'v' + ctx.nextVersion,
+                    '--body', `${ctx.changeLog}`
+                ];
+
+                if (ctx.uploads)
+                {
+                    args = args.concat(ctx.uploads);
+                }
+
+                return execa(`${__dirname}/../node_modules/.bin/github-release`, args);
+            }
         }
     ],
     {
