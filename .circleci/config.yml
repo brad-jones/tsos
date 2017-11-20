@@ -30,3 +30,26 @@ jobs:
               echo -e "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
               npm run release
             fi
+
+  upgrade:
+    docker:
+      - image: circleci/node:8.9.0
+    steps:
+      - checkout
+      - run: sha1sum yarn.lock > yarn.lock.sha1
+      - run: yarn upgrade
+      - run: ! sha1sum -c yarn.lock.sha1
+      - run: echo "This is where we create a PR";
+
+workflows:
+  version: 2
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - upgrade
