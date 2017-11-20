@@ -16,8 +16,8 @@
     },
     "dependencies": {
         "@brad-jones/tsos-compiler": "0.0.0-semantically-released",
-        "ts-simple-ast": "^0.94.0",
-        "tslib": "^1.7.1"
+        "ts-simple-ast": "^0.95.0",
+        "tslib": "^1.8.0"
     },
     "peerDependencies": {
         "typescript": "^2.6.1"
@@ -29,7 +29,7 @@
         "alsatian": "^2.0.0",
         "npm-check-updates": "^2.13.0",
         "mz": "^2.7.0",
-        "nyc": "^11.2.1",
+        "nyc": "^11.3.0",
         "shx": "^0.2.2",
         "tap-spec": "^4.1.1",
         "tap-xunit": "^1.7.0",
