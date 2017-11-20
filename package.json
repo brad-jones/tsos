@@ -8,7 +8,7 @@
         "commitmsg": "commitlint -e",
         "clean": "shx rm -rf ./test-results; node ./scripts/workspaceRunner.js clean",
         "build": "node ./scripts/workspaceRunner.js build",
-        "rebuild": "yarn clean; yarn build;",
+        "rebuild": "yarn clean; yarn install; yarn build;",
         "watch": "nodemon -e ts,js,json,env -i dist/ -i tests/ -x 'yarn rebuild'",
         "test": "node ./scripts/workspaceRunner.js test",
         "cover": "node ./scripts/workspaceRunner.js cover",
