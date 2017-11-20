@@ -1,9 +1,9 @@
 version: 2
 jobs:
 
-  "node-8.9.0":
+  git-lint:
     docker:
-      - image: circleci/node:8.9.0
+      - image: circleci/node:latest
     steps:
       - checkout
       - restore_cache:
@@ -16,6 +16,19 @@ jobs:
       - run:
           name: Lint Git Commit Messages
           command: ./node_modules/.bin/commitlint --from=master --to="$CIRCLE_SHA1"
+
+  deploy:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          key: dependencies-{{ checksum "yarn.lock" }}
+          paths:
+              - ./node_modules
       - run: yarn build
       - run: yarn cover
       - store_test_results:
@@ -34,7 +47,7 @@ jobs:
 
   upgrade:
     docker:
-      - image: circleci/node:8.9.0
+      - image: circleci/node:latest
     steps:
       - checkout
       - run: sha1sum yarn.lock > yarn.lock.sha1
@@ -42,11 +55,90 @@ jobs:
       - run: "! sha1sum -c yarn.lock.sha1"
       - run: echo "This is where we create a PR";
 
+  node-8.9.0:
+    docker:
+      - image: circleci/node:8.9.0
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          key: dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+      - run: yarn build
+      - run: yarn test
+
+  node-9.0.0:
+    docker:
+      - image: circleci/node:9.0.0
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          key: dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+      - run: yarn build
+      - run: yarn test
+
+  node-9.1.0:
+    docker:
+      - image: circleci/node:9.1.0
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          key: dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+      - run: yarn build
+      - run: yarn test
+
+  node-9.2.0:
+    docker:
+      - image: circleci/node:9.2.0
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          key: dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+      - run: yarn build
+      - run: yarn test
+
 workflows:
   version: 2
   build:
     jobs:
-      - "node-8.9.0"
+      - git-lint
+      - node-8.9.0:
+          requires:
+            - git-lint
+      - node-9.0.0:
+          requires:
+            - git-lint
+      - node-9.1.0:
+          requires:
+            - git-lint
+      - node-9.2.0:
+          requires:
+            - git-lint
+      - deploy:
+          requires:
+            - git-lint
+            - node-8.9.0
+            - node-9.0.0
+            - node-9.1.0
+            - node-9.2.0
 
   nightly:
     triggers:
