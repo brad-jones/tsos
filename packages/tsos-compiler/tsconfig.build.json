@@ -1,8 +1,14 @@
 {
     "extends": "../../tsconfig.base.json",
     "compilerOptions": {
-        "rootDir": "./src",
-        "outDir": "./dist"
+        "rootDir": "../",
+        "outDir": "./dist",
+        "baseUrl": ".",
+        "paths": {
+            "@brad-jones/*": [
+                "../*/src"
+            ]
+        }
     },
     "include": [
         "./src/**/*.ts",

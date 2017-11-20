@@ -10,7 +10,7 @@
     },
     "scripts": {
         "clean": "shx rm -rf ./dist; shx rm -rf ./.nyc_output",
-        "build": "tsc -p tsconfig.build.json; shx chmod +x ./dist/index.js",
+        "build": "tsc -p tsconfig.build.json; shx cp -R ./dist/tsos-cli/**/* ./dist; shx rm -rf ./dist/tsos-*; shx chmod +x ./dist/index.js",
         "test": "echo 'Tests Comming Soon :)';",
         "cover": "echo 'Tests Comming Soon :)';"
     },

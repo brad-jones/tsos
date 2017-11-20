@@ -9,9 +9,9 @@
         "clean": "shx rm -rf ./test-results; node ./scripts/workspaceRunner.js clean",
         "build": "node ./scripts/workspaceRunner.js build",
         "rebuild": "yarn clean; yarn build;",
-        "watch": "nodemon -e ts,js,json,env -i dist/ -i tests/ -x 'yarn run rebuild'",
-        "test": "lerna run test --parallel --stream;",
-        "cover": "lerna run cover --parallel --stream;",
+        "watch": "nodemon -e ts,js,json,env -i dist/ -i tests/ -x 'yarn rebuild'",
+        "test": "node ./scripts/workspaceRunner.js test",
+        "cover": "node ./scripts/workspaceRunner.js cover",
         "release": "lerna publish -m 'chore(solution): publish new version to npm' --conventional-commits --yes; yarn run github-release",
         "github-release": "node ./github-release.js"
     },
