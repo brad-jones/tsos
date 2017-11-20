@@ -70,3 +70,6 @@ test-results/
 
 # Ignore vscode settings dir
 .vscode/
+
+# Ignore checksum files
+*.sha1
