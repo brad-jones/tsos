@@ -12,6 +12,15 @@ jobs:
           key: dependencies-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
+      - run:
+          name: Lint Git Commit Messages
+          command: |
+            set -e
+            git remote set-branches origin master
+            git fetch --unshallow --quiet
+            git checkout master --quiet
+            git checkout - --quiet
+            ./node_modules/.bin/commitlint --from=master --to="$CIRCLE_SHA1"
       - run: yarn build
       - run: yarn cover
       - store_test_results:
