@@ -120,6 +120,7 @@ workflows:
   build:
     jobs:
       - git-lint
+      - upgrade
       - node-8.9.0:
           requires:
             - git-lint
