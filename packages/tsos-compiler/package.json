@@ -1,6 +1,6 @@
 {
     "name": "@brad-jones/tsos-compiler",
-    "version": "5.1.2",
+    "version": "0.0.0-semantically-released",
     "description": "An extendable typescript compiler, based on ts-simple-ast.",
     "author": "Brad Jones <brad@bjc.id.au>",
     "repository": "brad-jones/tsos",
@@ -23,7 +23,7 @@
         "tslib": "^1.7.1"
     },
     "peerDependencies": {
-        "typescript": "^2.5.3"
+        "typescript": "^2.6.1"
     },
     "devDependencies": {
         "@types/lodash": "^4.14.85",
@@ -34,7 +34,7 @@
         "shx": "^0.2.2",
         "tap-spec": "^4.1.1",
         "tap-xunit": "^1.7.0",
-        "typescript": "^2.5.3"
+        "typescript": "^2.6.1"
     },
     "publishConfig": {
         "access": "public"

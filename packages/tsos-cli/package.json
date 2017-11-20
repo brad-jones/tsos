@@ -1,6 +1,6 @@
 {
     "name": "@brad-jones/tsos-cli",
-    "version": "5.1.2",
+    "version": "0.0.0-semantically-released",
     "description": "Provides a cli interface for the tsos-compiler.",
     "author": "Brad Jones <brad@bjc.id.au>",
     "repository": "brad-jones/tsos",
@@ -15,7 +15,7 @@
         "cover": "echo 'Tests Comming Soon :)';"
     },
     "dependencies": {
-        "@brad-jones/tsos-compiler": "^5.1.2",
+        "@brad-jones/tsos-compiler": "0.0.0-semantically-released",
         "caporal": "^0.8.0",
         "change-case": "^3.0.1",
         "inversify": "^4.3.0",
@@ -29,7 +29,7 @@
         "xxhashjs": "^0.2.1"
     },
     "peerDependencies": {
-        "typescript": "^2.5.3"
+        "typescript": "^2.6.1"
     },
     "devDependencies": {
         "@types/node": "^8.0.53",
@@ -40,7 +40,7 @@
         "nyc": "^11.2.1",
         "shx": "^0.2.2",
         "tap-xunit": "^1.7.0",
-        "typescript": "^2.5.3"
+        "typescript": "^2.6.1"
     },
     "publishConfig": {
         "access": "public"
