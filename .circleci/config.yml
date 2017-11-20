@@ -55,6 +55,8 @@ jobs:
       - run: sha1sum yarn.lock > yarn.lock.sha1
       - run: yarn upgrade-packages
       - run: "! sha1sum -c yarn.lock.sha1"
+      - run: git config --global user.email "$GIT_EMAIL"
+      - run: git config --global user.name "$GIT_NAME"
       - run: git checkout -b automated-package-upgrade
       - run: git add .
       - run: "git commit -m \"feat(solution): automated package upgrade\""
