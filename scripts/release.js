@@ -56,9 +56,15 @@ new Listr
             )
         },{
             title: 'Get the current version',
-            task: (ctx, task) => execa.stdout('git', ['describe', '--tags', '--abbrev=0']).then(result =>
+            task: (ctx, task) => execa.stdout('git', ['describe', '--tags', '--abbrev=0'])
+            .then(result =>
             {
                 ctx.currentVersion = lodash.trim(result).replace('v', '');
+                task.title = `${task.title}: ${ctx.currentVersion}`;
+            })
+            .catch(e =>
+            {
+                ctx.currentVersion = '1.0.0';
                 task.title = `${task.title}: ${ctx.currentVersion}`;
             })
         },{
