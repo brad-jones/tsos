@@ -50,18 +50,23 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
-      - run: "! git branch -a | egrep \"remotes/origin/automated-package-upgrade\""
-      - run: yarn install
-      - run: sha1sum yarn.lock > yarn.lock.sha1
-      - run: yarn upgrade-packages
-      - run: "! sha1sum -c yarn.lock.sha1"
-      - run: git config --global user.email "$GIT_EMAIL"
-      - run: git config --global user.name "$GIT_NAME"
-      - run: git checkout -b automated-package-upgrade
-      - run: git add .
-      - run: "git commit -m \"feat(solution): automated package upgrade\""
-      - run: git push -u origin automated-package-upgrade
-      - run: "node ./scripts/pr.js --title \"feat(solution): automated package upgrade\" --head automated-package-upgrade --base master"
+      - run:
+          name: Automatically upgrade all packages and submit PR with changes.
+          command: |
+            if [ ! git branch -a | egrep \"remotes/origin/automated-package-upgrade\" ]; then
+              yarn install --ignore-engines
+              sha1sum yarn.lock > yarn.lock.sha1
+              yarn upgrade-packages
+              if [ ! sha1sum -c yarn.lock.sha1 ]; then
+                git config --global user.email "$GIT_EMAIL"
+                git config --global user.name "$GIT_NAME"
+                git checkout -b automated-package-upgrade
+                git add .
+                "git commit -m \"feat(solution): automated package upgrade\""
+                git push -u origin automated-package-upgrade
+                "node ./scripts/pr.js --title \"feat(solution): automated package upgrade\" --head automated-package-upgrade --base master"
+              fi
+            fi
 
   node-8.9.0:
     docker:
