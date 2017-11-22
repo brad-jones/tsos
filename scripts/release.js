@@ -3,6 +3,7 @@ const fs = require('mz/fs');
 const path = require('path');
 const execa = require('execa');
 const Listr = require('listr');
+const delay = require('delay');
 const lodash = require('lodash');
 const semver = require('semver');
 const yargs = require('yargs').argv;
@@ -175,10 +176,11 @@ new Listr
                     {
                         return {
                             title: package,
-                            task: () => execa.stdout('npm', ['pack', `@brad-jones/${package}@${ctx.nextVersion}`]).then(result =>
-                            {
-                                ctx.uploads.push(lodash.trim(result));
-                            })
+                            task: () => delay(5000).then(_ =>
+                                execa.stdout('npm', ['pack', `@brad-jones/${package}@${ctx.nextVersion}`]).then(result =>
+                                    ctx.uploads.push(lodash.trim(result))
+                                )
+                            )
                         };
                     }),
                     {

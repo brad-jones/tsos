@@ -22,6 +22,7 @@
         "axios": "^0.17.1",
         "conventional-changelog": "^1.1.7",
         "conventional-recommended-bump": "^1.0.3",
+        "delay": "^2.0.0",
         "execa": "^0.8.0",
         "get-stream": "^3.0.0",
         "github-release-cli": "^0.3.0",
