@@ -13,7 +13,7 @@
         "test": "node ./scripts/workspaceRunner.js test",
         "cover": "node ./scripts/workspaceRunner.js cover",
         "release": "node ./scripts/release.js",
-        "upgrade-packages": "ncu --upgrade --upgradeAll; node ./scripts/workspaceRunner.js upgrade-packages; yarn install"
+        "upgrade-packages": "ncu --upgrade --upgradeAll; node ./scripts/workspaceRunner.js upgrade-packages; yarn install --ignore-engines"
     },
     "devDependencies": {
         "@commitlint/cli": "^5.0.1",
