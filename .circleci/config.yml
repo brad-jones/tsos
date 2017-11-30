@@ -52,6 +52,7 @@ jobs:
       - checkout
       - run:
           name: Automatically upgrade all packages and submit PR with changes.
+          shell: /bin/bash
           command: |
             if [ ! `git branch -a | egrep "remotes/origin/automated-package-upgrade"` ]; then
               yarn install --ignore-engines
