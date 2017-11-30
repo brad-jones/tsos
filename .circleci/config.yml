@@ -53,11 +53,12 @@ jobs:
       - run:
           name: Automatically upgrade all packages and submit PR with changes.
           command: |
-            if [ ! git branch -a | egrep \"remotes/origin/automated-package-upgrade\" ]; then
+            if [ ! `git branch -a | egrep "remotes/origin/automated-package-upgrade"` ]; then
               yarn install --ignore-engines
               sha1sum yarn.lock > yarn.lock.sha1
               yarn upgrade-packages
-              if [ ! sha1sum -c yarn.lock.sha1 ]; then
+              sha1sum -c yarn.lock.sha1
+              if [ $? -ne 0 ]; then
                 git config --global user.email "$GIT_EMAIL"
                 git config --global user.name "$GIT_NAME"
                 git checkout -b automated-package-upgrade
@@ -133,6 +134,7 @@ workflows:
   build:
     jobs:
       - git-lint
+      - upgrade
       - node-8.9.0:
           requires:
             - git-lint
