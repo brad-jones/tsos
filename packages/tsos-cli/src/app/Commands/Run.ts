@@ -14,6 +14,7 @@ export interface ICmdOptions
 {
     noCache: boolean;
     tsOptions: string | undefined;
+    scriptOptions: string | undefined;
     nodeOptions: string[] | undefined;
     astVisitors: string | undefined;
     noVisitors: boolean;
@@ -29,6 +30,7 @@ export default class Run implements ICommand
         config.argument('script', 'The TypeScript file to run.', caporal.STRING);
         config.option('--no-cache', 'If set transpilation cache will be disabled.', caporal.BOOLEAN, false);
         config.option('--ts-options', 'A csv list of arguments / options that are accepted by tsc.', caporal.STRING, undefined, false);
+        config.option('--script-options', 'A csv list of arguments / options that are accepted by the script being run.', caporal.STRING, undefined, false);
         config.option('--node-options', 'A csv list of arguments / options that are accepted by node.', caporal.LIST, undefined, false);
         config.option('--ast-visitors', 'A csv list of file globs where we might find some visitor modules.', caporal.STRING, undefined, false);
         config.option('--no-visitors', 'If set, no auto discovered visitors will be applied.', caporal.BOOLEAN, false);
@@ -47,11 +49,25 @@ export default class Run implements ICommand
                 let segments = nodeOption.split('=');
                 if (segments.length > 1)
                 {
-                    procArgs.push(`--${segments[0]} ${segments[1]}`);
+                    if (segments[0].length === 1)
+                    {
+                        procArgs.push(`-${segments[0]} ${segments[1]}`);
+                    }
+                    else
+                    {
+                        procArgs.push(`--${segments[0]} ${segments[1]}`);
+                    }
                 }
                 else
                 {
-                    procArgs.push(nodeOption);
+                    if (nodeOption.length === 1)
+                    {
+                        procArgs.push(`-${nodeOption}`);
+                    }
+                    else
+                    {
+                        procArgs.push(`--${nodeOption}`);
+                    }
                 }
             }
         }
@@ -65,6 +81,7 @@ export default class Run implements ICommand
         if (options.noCache) procArgs.push('--no-cache');
         if (options.noVisitors) procArgs.push('--no-visitors');
         if (options.tsOptions) { procArgs.push('--ts-options'); procArgs.push(options.tsOptions); }
+        if (options.scriptOptions) { procArgs.push('--script-options'); procArgs.push(options.scriptOptions); }
         if (options.astVisitors) { procArgs.push('--ast-visitors'); procArgs.push(options.astVisitors); }
 
         // Spawn the child node process
