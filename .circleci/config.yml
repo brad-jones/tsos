@@ -64,9 +64,9 @@ jobs:
                 git config --global user.name "$GIT_NAME"
                 git checkout -b automated-package-upgrade
                 git add .
-                "git commit -m \"feat(solution): automated package upgrade\""
+                git commit -m "feat(solution): automated package upgrade"
                 git push -u origin automated-package-upgrade
-                "node ./scripts/pr.js --title \"feat(solution): automated package upgrade\" --head automated-package-upgrade --base master"
+                node ./scripts/pr.js --title "feat(solution): automated package upgrade" --head automated-package-upgrade --base master
               fi
             fi
 
