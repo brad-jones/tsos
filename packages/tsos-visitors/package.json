@@ -16,11 +16,11 @@
     },
     "dependencies": {
         "@brad-jones/tsos-compiler": "0.0.0-semantically-released",
-        "ts-simple-ast": "^0.95.0",
+        "ts-simple-ast": "^1.0.1",
         "tslib": "^1.8.0"
     },
     "peerDependencies": {
-        "typescript": "^2.6.1"
+        "typescript": "^2.6.2"
     },
     "devDependencies": {
         "@types/mz": "^0.0.32",
@@ -33,7 +33,7 @@
         "shx": "^0.2.2",
         "tap-spec": "^4.1.1",
         "tap-xunit": "^1.7.0",
-        "typescript": "^2.6.1"
+        "typescript": "^2.6.2"
     },
     "publishConfig": {
         "access": "public"
