@@ -38,5 +38,9 @@
         "shx": "^0.2.2",
         "typescript": "^2.6.2",
         "yargs": "^10.0.3"
+    },
+    "resolutions":
+    {
+        "typescript": "^2.6.2"
     }
 }
