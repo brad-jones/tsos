@@ -90,6 +90,10 @@
     mkdirp "^0.5.1"
     rimraf "^2.5.2"
 
+"@types/events@*":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@types/events/-/events-1.1.0.tgz#93b1be91f63c184450385272c47b6496fd028e02"
+
 "@types/glob@*":
   version "5.0.33"
   resolved "https://registry.yarnpkg.com/@types/glob/-/glob-5.0.33.tgz#3dff7c6ce09d65abe919c7961dc3dee016f36ad7"
@@ -97,9 +101,9 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
-"@types/lodash@^4.14.86":
-  version "4.14.86"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.86.tgz#6788d3d75032c46322ff1c144c948cf8117c405b"
+"@types/lodash@^4.14.87":
+  version "4.14.87"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.87.tgz#55f92183b048c2c64402afe472f8333f4e319a6b"
 
 "@types/minimatch@*":
   version "3.0.1"
@@ -115,9 +119,11 @@
   version "8.0.50"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.50.tgz#dc545448e128c88c4eec7cd64025fcc3b7604541"
 
-"@types/node@^8.0.53":
-  version "8.0.53"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.53.tgz#396b35af826fa66aad472c8cb7b8d5e277f4e6d8"
+"@types/node@^8.0.54":
+  version "8.0.54"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.54.tgz#3fd9357db4af388b79e03845340259440edffde6"
+  dependencies:
+    "@types/events" "*"
 
 "@types/shelljs@^0.7.6":
   version "0.7.6"
@@ -831,9 +837,9 @@ co@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
 
-code-block-writer@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/code-block-writer/-/code-block-writer-5.0.0.tgz#51c95723208c1af3003767b82170572dd2aff6e6"
+code-block-writer@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/code-block-writer/-/code-block-writer-6.1.1.tgz#27808378a79cdf0695674c27912f2eb3058343c7"
 
 code-point-at@^1.0.0:
   version "1.1.0"
@@ -4916,11 +4922,11 @@ trim@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/trim/-/trim-0.0.1.tgz#5858547f6b290757ee95cccc666fb50084c460dd"
 
-ts-simple-ast@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/ts-simple-ast/-/ts-simple-ast-1.0.1.tgz#754ab1ae9dd0b0e3e23a789e52f50f5934aeb86f"
+ts-simple-ast@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/ts-simple-ast/-/ts-simple-ast-1.1.0.tgz#21972df6df254133fb6beda12beefba720818130"
   dependencies:
-    code-block-writer "^5.0.0"
+    code-block-writer "^6.1.1"
     globby "^6.1.0"
     minimatch "^3.0.4"
     object-assign "^4.1.1"

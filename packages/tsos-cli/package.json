@@ -33,7 +33,7 @@
         "typescript": "^2.6.2"
     },
     "devDependencies": {
-        "@types/node": "^8.0.53",
+        "@types/node": "^8.0.54",
         "@types/shelljs": "^0.7.6",
         "@types/source-map-support": "^0.4.0",
         "@types/xxhashjs": "^0.1.1",
