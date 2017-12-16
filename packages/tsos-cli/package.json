@@ -19,7 +19,7 @@
         "@brad-jones/tsos-compiler": "0.0.0-semantically-released",
         "caporal": "^0.9.0",
         "change-case": "^3.0.1",
-        "inversify": "^4.6.0",
+        "inversify": "^4.6.1",
         "node-hook": "^1.0.0",
         "reflect-metadata": "^0.1.10",
         "replace-in-file": "^3.0.0",
