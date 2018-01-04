@@ -1,7 +1,7 @@
 import { tmpdir } from 'os';
 import * as path from 'path';
+import * as fs from 'fs-extra';
 import * as ts from 'typescript';
-import * as shell from 'shelljs';
 import nodeHook = require('node-hook');
 import { h64 as xxhash } from 'xxhashjs';
 import { readFileSync, writeFileSync } from 'fs';
@@ -52,21 +52,7 @@ export class NodeHook
 
     public Register(tsCliOptions: string[], astVisitorGlobs: string[] | boolean = [], transpilationCache = true): void
     {
-        // When working with parallel node processes, sometimes a race condition
-        // happens and shelljs attempts to create the folder even though it
-        // already exists.
-        try
-        {
-            shell.mkdir('-p', NodeHook.cacheDir);
-        }
-        catch (e)
-        {
-            if (e.code !== 'EEXIST')
-            {
-                throw e;
-            }
-        }
-
+        fs.ensureDirSync(NodeHook.cacheDir);
         this.transpiledFiles = new Map<string, string>();
         this.transpilationCache = transpilationCache;
         this.cliConfig = this.tsCliParser.ParseTsOptions(tsCliOptions);
@@ -147,7 +133,8 @@ export class NodeHook
     private _transpile(config: ts.ParsedCommandLine, srcFileName: string, cachedFile: string, cachedFolder: string, astVisitors: IAstVisitor[]): string
     {
         // Ensure we don't fill up someone's filesystem with a stale cache
-        shell.rm('-rf', cachedFolder); shell.mkdir('-p', cachedFolder);
+        fs.removeSync(cachedFolder);
+        fs.ensureDirSync(cachedFolder);
 
         // Force some compiler options, required to make tsos work
         let additionalCompilerOptions: ts.CompilerOptions = this.cliConfig.options;
@@ -165,7 +152,7 @@ export class NodeHook
         let diag = result.getDiagnostics();
         if (diag.length > 0)
         {
-            shell.rm('-rf', cachedFolder);
+            fs.removeSync(cachedFolder);
             throw diag;
         }
 
@@ -175,8 +162,8 @@ export class NodeHook
         // when it comes time to emit that source file.
         let srcMapFilePath: string = (result.compilerObject as any).sourceMaps[0].sourceMapFilePath;
         let jsFilePath = srcMapFilePath.replace('.js.map', '.js');
-        shell.mv(srcMapFilePath, cachedFile + '.map');
-        shell.mv(jsFilePath, cachedFile);
+        fs.moveSync(srcMapFilePath, cachedFile + '.map');
+        fs.moveSync(jsFilePath, cachedFile);
 
         // Now fix up the source map comment
         replaceInFile.sync
@@ -193,7 +180,7 @@ export class NodeHook
         writeFileSync(cachedFile + '.map', JSON.stringify(sourceMap), 'utf8');
 
         // Clean up the old directory structure created by typescript
-        shell.rm('-rf', path.join(cachedFolder, jsFilePath.replace(cachedFolder, '').split('/').find(_ => _.length > 0)));
+        fs.removeSync(path.join(cachedFolder, jsFilePath.replace(cachedFolder, '').split('/').find(_ => _.length > 0)));
 
         return readFileSync(cachedFile, 'utf8');
     }
