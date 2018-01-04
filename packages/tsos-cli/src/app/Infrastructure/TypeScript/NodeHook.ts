@@ -52,7 +52,21 @@ export class NodeHook
 
     public Register(tsCliOptions: string[], astVisitorGlobs: string[] | boolean = [], transpilationCache = true): void
     {
-        shell.mkdir('-p', NodeHook.cacheDir);
+        // When working with parallel node processes, sometimes a race condition
+        // happens and shelljs attempts to create the folder even though it
+        // already exists.
+        try
+        {
+            shell.mkdir('-p', NodeHook.cacheDir);
+        }
+        catch (e)
+        {
+            if (e.code !== 'EEXIST')
+            {
+                throw e;
+            }
+        }
+
         this.transpiledFiles = new Map<string, string>();
         this.transpilationCache = transpilationCache;
         this.cliConfig = this.tsCliParser.ParseTsOptions(tsCliOptions);
