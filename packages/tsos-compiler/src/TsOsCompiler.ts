@@ -10,7 +10,7 @@ import { IAstVisitorFinder, AstVisitorFinder } from './AstVisitorFinder';
 
 export let ITsOsCompiler = Symbol(__filename);
 
-// TODO: Write some documenation
+// TODO: Write some documentation
 export interface ITsOsCompiler
 {
     ConfigureAst(ast: TsSimpleAst): Promise<void>;
