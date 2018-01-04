@@ -45,13 +45,13 @@ export default class Build implements ICommand
         let normalisedProjectPath = args.project.startsWith('/') ? args.project : path.join(process.cwd(), args.project);
         let normalisedVisitors = options.astVisitors.map(_ => _.startsWith('/') ? _ : path.join(process.cwd(), _));
 
-        // Configure the intial ast
+        // Configure the initial ast
         await this.tsOsCompiler.ConfigureAst(normalisedProjectPath, this.tsCliParser.ParseTsOptions(options.tsOptions).options);
 
         // It is possible that visitors themselves may well be TypeScript files
         // that need compilation first so we register the NodeHook here as well
         // but visitors will get transpiled without any visitors otherwise we
-        // find ourselves in circular dependecy problem.
+        // find ourselves in circular dependency problem.
         this.nodeHook.Register(options.tsOptions, false);
 
         // Load up visitors provided by command line or
