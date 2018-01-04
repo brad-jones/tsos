@@ -93,6 +93,7 @@ export default class Runner implements ICommand
         {
             console.log(getErrorSource(e));
             console.error(e);
+            process.exit(1);
         }
     }
 }
