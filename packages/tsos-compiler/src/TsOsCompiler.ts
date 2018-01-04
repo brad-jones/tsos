@@ -124,7 +124,7 @@ export class TsOsCompiler
 
     public AddSrcFiles(fileGlobs: string[]): void
     {
-        this.ast.addSourceFiles.apply(this.ast, fileGlobs);
+        this.ast.addExistingSourceFiles.apply(this.ast, fileGlobs);
     }
 
     public AddAstVisitors(tsConfigFilePath: string): Promise<void>;
