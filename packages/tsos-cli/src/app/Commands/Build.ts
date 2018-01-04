@@ -70,6 +70,10 @@ export default class Build implements ICommand
 
         // Check for errors
         let diag = result.getDiagnostics();
-        if (diag.length > 0) throw diag;
+        if (diag.length > 0)
+        {
+            console.error(diag);
+            throw new Error('TypeScript contains errors!');
+        }
     }
 }
