@@ -1,5 +1,5 @@
 import * as path from 'path';
-import caporal = require('caporal');
+import * as caporal from 'caporal';
 import { inject, injectable } from 'inversify';
 import { ICommand } from 'app/Commands/ICommand';
 import { ITsOsCompiler } from '@brad-jones/tsos-compiler';

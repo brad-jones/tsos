@@ -1,4 +1,4 @@
-import caporal = require('caporal');
+import * as caporal from 'caporal';
 import { spawn } from 'child_process';
 import { injectable } from 'inversify';
 import { ICommand } from 'app/Commands/ICommand';

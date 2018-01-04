@@ -1,4 +1,4 @@
-import caporal = require('caporal');
+import * as caporal from 'caporal';
 import { Container } from 'inversify';
 import requireGlob = require('require-glob');
 import { ICommand } from 'app/Commands/ICommand';

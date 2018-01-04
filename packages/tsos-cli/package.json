@@ -17,7 +17,7 @@
     },
     "dependencies": {
         "@brad-jones/tsos-compiler": "0.0.0-semantically-released",
-        "caporal": "^0.9.0",
+        "caporal": "cazgp/Caporal.js#8f353d593fe592c9fea51b4e565f1b3d747777a2",
         "change-case": "^3.0.1",
         "inversify": "^4.9.0",
         "node-hook": "^1.0.0",
