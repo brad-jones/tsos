@@ -138,7 +138,7 @@ export class NodeHook
         {
             // NOTE: Even though we ignore the cache, TsSimpleAst does not
             // provide an option to get the transpiled source before it is
-            // saved to the filesystem. So therfore we still need somewhere
+            // saved to the filesystem. So therefore we still need somewhere
             // to save the transpiled source.
             return this._transpile(config, filename, cachedFile, cachedFolder, astVisitors);
         }
@@ -171,7 +171,7 @@ export class NodeHook
 
         // Now rename the transpiled files
         // NOTE: The reason for this funny business is because using the
-        // compiler option "outFile" does not treat each source file seperatly
+        // compiler option "outFile" does not treat each source file separately
         // when it comes time to emit that source file.
         let srcMapFilePath: string = (result.compilerObject as any).sourceMaps[0].sourceMapFilePath;
         let jsFilePath = srcMapFilePath.replace('.js.map', '.js');
