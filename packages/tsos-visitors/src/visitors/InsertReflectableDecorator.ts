@@ -30,7 +30,7 @@ let InsertReflectableDecorator: IAstVisitor = (ast) =>
 
         if (addedDecorator)
         {
-            srcFile.addImport
+            srcFile.addImportDeclaration
             ({
                 namedImports:[{ name: 'reflectable' }],
                 moduleSpecifier: '@brad-jones/tsos-visitors'
