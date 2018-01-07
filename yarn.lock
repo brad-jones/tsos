@@ -3143,9 +3143,9 @@ node-uuid@~1.4.7:
   version "1.4.8"
   resolved "https://registry.yarnpkg.com/node-uuid/-/node-uuid-1.4.8.tgz#b040eb0923968afabf8d32fb1f17f1167fdab907"
 
-nodemon@^1.14.7:
-  version "1.14.7"
-  resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.14.7.tgz#ef544baa64603155c2ee6dcfba9204a2cd46d355"
+nodemon@^1.14.8:
+  version "1.14.8"
+  resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.14.8.tgz#0cc906035e2d4bf771d5f40fb5d8e37fb3e673e7"
   dependencies:
     chokidar "^1.7.0"
     debug "^2.6.8"
@@ -4998,9 +4998,9 @@ trim@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/trim/-/trim-0.0.1.tgz#5858547f6b290757ee95cccc666fb50084c460dd"
 
-ts-simple-ast@^5.3.1:
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/ts-simple-ast/-/ts-simple-ast-5.3.1.tgz#c188c9559f58c02a8bfbf6be9b8ce0d8066628a2"
+ts-simple-ast@^5.3.2:
+  version "5.3.2"
+  resolved "https://registry.yarnpkg.com/ts-simple-ast/-/ts-simple-ast-5.3.2.tgz#9fb9ebde8fce42c3c0865776e228449e49afbfd2"
   dependencies:
     code-block-writer "^6.2.0"
     globby "^6.1.0"

@@ -20,7 +20,7 @@
         "lodash": "^4.17.4",
         "mz": "^2.7.0",
         "require-glob": "^3.2.0",
-        "ts-simple-ast": "^5.3.1",
+        "ts-simple-ast": "^5.3.2",
         "tslib": "^1.8.1"
     },
     "peerDependencies": {
