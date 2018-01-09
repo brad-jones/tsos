@@ -24,7 +24,7 @@
     },
     "devDependencies": {
         "@types/mz": "^0.0.32",
-        "@types/node": "^8.5.7",
+        "@types/node": "^9.3.0",
         "@types/shelljs": "^0.7.7",
         "alsatian": "^2.0.0",
         "npm-check-updates": "^2.14.0",

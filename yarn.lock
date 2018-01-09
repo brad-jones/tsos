@@ -176,9 +176,9 @@
   version "8.5.5"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.5.5.tgz#6f9e8164ae1a55a9beb1d2571cfb7acf9d720c61"
 
-"@types/node@^8.5.7":
-  version "8.5.7"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.5.7.tgz#9c498c35af354dcfbca3790fb2e81129e93cf0e2"
+"@types/node@^9.3.0":
+  version "9.3.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.3.0.tgz#3a129cda7c4e5df2409702626892cb4b96546dd5"
 
 "@types/shelljs@^0.7.7":
   version "0.7.7"
@@ -3143,9 +3143,9 @@ node-uuid@~1.4.7:
   version "1.4.8"
   resolved "https://registry.yarnpkg.com/node-uuid/-/node-uuid-1.4.8.tgz#b040eb0923968afabf8d32fb1f17f1167fdab907"
 
-nodemon@^1.14.8:
-  version "1.14.8"
-  resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.14.8.tgz#0cc906035e2d4bf771d5f40fb5d8e37fb3e673e7"
+nodemon@^1.14.9:
+  version "1.14.9"
+  resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.14.9.tgz#eec45a916db61503264037b4233c0f8a15d69802"
   dependencies:
     chokidar "^1.7.0"
     debug "^2.6.8"
