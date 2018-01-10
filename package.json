@@ -16,9 +16,9 @@
         "upgrade-packages": "ncu --upgrade --upgradeAll && node ./scripts/workspaceRunner.js upgrade-packages && yarn install --ignore-engines"
     },
     "devDependencies": {
-        "@commitlint/cli": "^5.2.8",
+        "@commitlint/cli": "^6.0.1",
         "@commitlint/config-angular": "^5.1.1",
-        "@commitlint/prompt-cli": "^5.2.8",
+        "@commitlint/prompt-cli": "^6.0.1",
         "axios": "^0.17.1",
         "conventional-changelog": "^1.1.7",
         "conventional-recommended-bump": "^1.1.0",
@@ -31,13 +31,13 @@
         "listr": "^0.13.0",
         "lodash": "^4.17.4",
         "mz": "^2.7.0",
-        "nodemon": "^1.14.9",
+        "nodemon": "^1.14.10",
         "npm-check-updates": "^2.14.0",
         "octonode": "^0.9.1",
         "semver": "^5.4.1",
         "shx": "^0.2.2",
         "typescript": "^2.6.2",
-        "yargs": "^10.0.3"
+        "yargs": "^10.1.1"
     },
     "resolutions":
     {
