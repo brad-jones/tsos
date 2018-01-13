@@ -16,9 +16,9 @@
         "upgrade-packages": "ncu --upgrade --upgradeAll && node ./scripts/workspaceRunner.js upgrade-packages && yarn install --ignore-engines"
     },
     "devDependencies": {
-        "@commitlint/cli": "^6.0.1",
-        "@commitlint/config-angular": "^5.1.1",
-        "@commitlint/prompt-cli": "^6.0.1",
+        "@commitlint/cli": "^6.0.2",
+        "@commitlint/config-angular": "^6.0.2",
+        "@commitlint/prompt-cli": "^6.0.2",
         "axios": "^0.17.1",
         "conventional-changelog": "^1.1.7",
         "conventional-recommended-bump": "^1.1.0",
