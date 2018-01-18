@@ -205,8 +205,9 @@ export class TsOsCompilerFixture
         let compiler = new TsOsCompiler();
         compiler.ConfigureAstSync({});
         SpyOn(compiler['ast'], 'addExistingSourceFiles');
-        compiler.AddSrcFiles(['/foo/bar']);
-        Expect(compiler['ast']['addExistingSourceFiles']).toHaveBeenCalledWith('/foo/bar');
+        let files = ['/foo/bar'];
+        compiler.AddSrcFiles(files);
+        Expect(compiler['ast']['addExistingSourceFiles']).toHaveBeenCalledWith(files);
     }
 
     @AsyncTest()
