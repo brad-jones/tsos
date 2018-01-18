@@ -96,11 +96,15 @@ export class TsOsCompiler
             }
 
             // Create the new ast
-            this.ast = new TsSimpleAst({ compilerOptions: compilerOptions });
+            this.ast = new TsSimpleAst({ compilerOptions: compilerOptions, addFilesFromTsConfig: false });
 
             // Automatically add all source files to the ast.
             // Down the track this may not be required.
             // see: https://github.com/dsherret/ts-simple-ast/issues/7
+            // While TsSimpleAst now allows us to import files from tsconfig,
+            // in order to maintain our current interface (we allow files to be
+            // automatically imported from ParsedCommandLine) we will disable
+            // the provided functionality and continue to use our own.
             if (typeof args[2] === 'undefined' || typeof args[2] === 'boolean')
             {
                 if (args[2] === false) return;
