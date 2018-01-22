@@ -4,6 +4,7 @@ import * as ts from 'typescript';
 import { TsOsCompiler } from '@brad-jones/tsos-compiler';
 import { InsertReflectableDecorator } from '@brad-jones/tsos-visitors';
 import { Expect, Test, AsyncTest, Timeout, AsyncSetupFixture, TeardownFixture } from "alsatian";
+import { ModuleKind, ModuleResolutionKind, ScriptTarget } from 'typescript';
 
 export class InsertReflectableDecoratorFixture
 {
@@ -13,7 +14,13 @@ export class InsertReflectableDecoratorFixture
     public async CompileTypeScript()
     {
         let compiler = new TsOsCompiler();
-        await compiler.ConfigureAst({ emitDecoratorMetadata: true, experimentalDecorators: true });
+        await compiler.ConfigureAst
+        ({
+            emitDecoratorMetadata: true,
+            experimentalDecorators: true,
+            target: ScriptTarget.ES2017,
+            moduleResolution: ModuleResolutionKind.NodeJs
+        });
         await compiler.AddAstVisitors([InsertReflectableDecorator]);
         compiler.AddSrcFiles([`${__dirname}/ExampleClass.ts`]);
         let diag = (await compiler.Emit()).getDiagnostics();
@@ -24,10 +31,9 @@ export class InsertReflectableDecoratorFixture
     @Test()
     public EnsureDecoratorsAndMetadataResourcesHaveBeenEmitted()
     {
-        Expect(this.transpiledJs).toContain('reflectable');
+        Expect(this.transpiledJs).toContain('tsosReflectable');
         Expect(this.transpiledJs).toContain('__decorate');
         Expect(this.transpiledJs).toContain('__metadata');
-        Expect(this.transpiledJs).toContain('__param');
     }
 
     @Test()
