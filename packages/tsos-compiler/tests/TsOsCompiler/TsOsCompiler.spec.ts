@@ -1,9 +1,9 @@
 import { fs } from 'mz';
 import * as ts from 'typescript';
 import * as shell from 'shelljs';
-import TsSimpleAst from 'ts-simple-ast';
-import { Expect, Test, AsyncTest, SpyOn, Any } from "alsatian";
+import TsSimpleAst, { EmitOptions } from 'ts-simple-ast';
 import { TsOsCompiler } from '@brad-jones/tsos-compiler';
+import { Expect, Test, AsyncTest, SpyOn, Any, TeardownFixture, Timeout } from "alsatian";
 
 export class TsOsCompilerFixture
 {
@@ -278,7 +278,76 @@ export class TsOsCompilerFixture
         compiler['astVisitors'].forEach(_ => Expect(typeof _).toBe('function'));
     }
 
-    // TODO: Write missing Emit tests
-    // Need to create a mock of the TsOsCompiler
-    // so we don't spend ages actually Emitting things.
+    @AsyncTest()
+    @Timeout(5000)
+    public async EmitAll()
+    {
+        let compiler = new TsOsCompiler();
+        await compiler.ConfigureAst(`${__dirname}/../../../../tsconfig.json`, { outDir: `${__dirname}/EmitAll` });
+        let emitResult = await compiler.Emit();
+        Expect(emitResult).toBeDefined();
+        Expect(emitResult.getDiagnostics()).toBeEmpty();
+        Expect(emitResult.getEmitSkipped()).toBe(false);
+        shell.rm('-rf', `${__dirname}/EmitAll`);
+    }
+
+    @AsyncTest()
+    @Timeout(5000)
+    public async EmitWithDiagnostics()
+    {
+        let compiler = new TsOsCompiler();
+        await compiler.ConfigureAst(`${__dirname}/EmitWithDiagnostics/tsconfig.json`);
+        let emitResult = await compiler.Emit();
+        Expect(emitResult).toBeDefined();
+        Expect(emitResult.getDiagnostics()).not.toBeEmpty();
+        Expect(emitResult.getEmitSkipped()).toBe(false);
+        shell.rm('-r', `${__dirname}/EmitWithDiagnostics/*.js`);
+    }
+
+    @AsyncTest()
+    @Timeout(5000)
+    public async EmitSingleSourceFile()
+    {
+        let compiler = new TsOsCompiler();
+        await compiler.ConfigureAst(`${__dirname}/../../../../tsconfig.json`, { outDir: `${__dirname}/EmitSingleSourceFile` });
+        let emitResult = await compiler.Emit(['TsOsCompiler.ts']);
+        Expect(emitResult.get('TsOsCompiler.ts')).toBeDefined();
+        Expect(emitResult.get('TsOsCompiler.ts').getDiagnostics()).toBeEmpty();
+        Expect(emitResult.get('TsOsCompiler.ts').getEmitSkipped()).toBe(false);
+        Expect(await fs.exists(`${__dirname}/EmitSingleSourceFile/tsos-compiler/src/TsOsCompiler.js`)).toBe(true);
+        shell.rm('-rf', `${__dirname}/EmitSingleSourceFile`);
+    }
+
+    @AsyncTest()
+    @Timeout(5000)
+    public async EmitManySourceFiles()
+    {
+        let files = ['tsos-compiler/src/TsOsCompiler.ts', 'tsos-compiler/src/AstVisitorFinder.ts'];
+        let compiler = new TsOsCompiler();
+        await compiler.ConfigureAst(`${__dirname}/../../../../tsconfig.json`, { outDir: `${__dirname}/EmitManySourceFiles` });
+        let emitResult = await compiler.Emit(files);
+        for (let file of files)
+        {
+            Expect(emitResult.get(file)).toBeDefined();
+            Expect(emitResult.get(file).getDiagnostics()).toBeEmpty();
+            Expect(emitResult.get(file).getEmitSkipped()).toBe(false);
+            Expect(await fs.exists(`${__dirname}/EmitManySourceFiles/${file.replace('.ts', '.js')}`)).toBe(true);
+        }
+        shell.rm('-rf', `${__dirname}/EmitManySourceFiles`);
+    }
+
+    @AsyncTest()
+    @Timeout(5000)
+    public async EmitOnlyDtsFiles()
+    {
+        let compiler = new TsOsCompiler();
+        await compiler.ConfigureAst(`${__dirname}/../../../../tsconfig.json`, { outDir: `${__dirname}/EmitOnlyDtsFiles` });
+        let emitResult = await compiler.Emit(['TsOsCompiler.ts'], { emitOnlyDtsFiles: true });
+        Expect(emitResult.get('TsOsCompiler.ts')).toBeDefined();
+        Expect(emitResult.get('TsOsCompiler.ts').getDiagnostics()).toBeEmpty();
+        Expect(emitResult.get('TsOsCompiler.ts').getEmitSkipped()).toBe(false);
+        Expect(await fs.exists(`${__dirname}/EmitOnlyDtsFiles/tsos-compiler/src/TsOsCompiler.js`)).toBe(false);
+        Expect(await fs.exists(`${__dirname}/EmitOnlyDtsFiles/tsos-compiler/src/TsOsCompiler.d.ts`)).toBe(true);
+        shell.rm('-rf', `${__dirname}/EmitOnlyDtsFiles`);
+    }
 }

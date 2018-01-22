@@ -15,5 +15,8 @@
         "visitors": [
             "./packages/tsos-visitors/dist/visitors/**/*.js"
         ]
-    }
+    },
+    "exclude": [
+        "./packages/tsos-compiler/tests/TsOsCompiler/EmitWithDiagnostics/**/*.ts"
+    ]
 }
