@@ -1,8 +1,10 @@
 import * as ts from 'typescript';
 import { IAstVisitor } from '@brad-jones/tsos-compiler';
-import { TypeGuards, DecoratableNode } from 'ts-simple-ast';
+import { TypeGuards, PropertyDeclaration, GetAccessorDeclaration, SetAccessorDeclaration } from 'ts-simple-ast';
 
-export function reflectable(constructor: Function){}
+export function ClassDecorator(target: any){}
+export function PropertyDecorator(target: any, propertyKey: string | symbol){}
+export function MethodDecorator(target: any, propertyKey: string, descriptor: TypedPropertyDescriptor<any>){}
 
 let InsertReflectableDecorator: IAstVisitor = (ast) =>
 {
@@ -10,29 +12,46 @@ let InsertReflectableDecorator: IAstVisitor = (ast) =>
     {
         let addedDecorator = false;
 
-        let decoratableNodes: DecoratableNode[] = srcFile.getDescendants()
-            .filter(_ => TypeGuards.isDecoratableNode(_)) as any;
-
-        decoratableNodes.filter(_ => _.getDecorators().length === 0).forEach(node =>
+        srcFile.getClasses().forEach(classDec =>
         {
-            try
+            if (classDec.getDecorators().length === 0)
             {
-                node.addDecorator({ name: 'reflectable' });
+                classDec.addDecorator({ name: 'tsosReflectable.ClassDecorator' });
                 addedDecorator = true;
             }
-            catch (e)
+
+            let getterAndSetters: string[] = [];
+            classDec.getStaticProperties().concat(classDec.getInstanceProperties() as PropertyDeclaration[]).forEach(propDec =>
             {
-                // fail silently, there are a large number of cases that
-                // cause exceptions, for some reason standalone function
-                // parameters are considered decoratable
-            }
+                // NOTE: Typescript will complain if we add a decorator to both getter and setter.
+                if (TypeGuards.isGetAccessorDeclaration(propDec) || TypeGuards.isSetAccessorDeclaration(propDec))
+                {
+                    if (getterAndSetters.includes(propDec.getName())) return;
+                    getterAndSetters.push(propDec.getName());
+                }
+
+                if (propDec.getDecorators().length === 0)
+                {
+                    propDec.addDecorator({ name: 'tsosReflectable.PropertyDecorator' });
+                    addedDecorator = true;
+                }
+            });
+
+            classDec.getStaticMethods().concat(classDec.getInstanceMethods()).forEach(methodDec =>
+            {
+                if (methodDec.getDecorators().length === 0)
+                {
+                    methodDec.addDecorator({ name: 'tsosReflectable.MethodDecorator' });
+                    addedDecorator = true;
+                }
+            });
         });
 
         if (addedDecorator)
         {
             srcFile.addImportDeclaration
             ({
-                namedImports:[{ name: 'reflectable' }],
+                namespaceImport: 'tsosReflectable',
                 moduleSpecifier: '@brad-jones/tsos-visitors'
             });
         }
