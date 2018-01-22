@@ -1,11 +1,12 @@
 import { merge } from 'lodash';
 import * as ts from 'typescript';
 import { Implements } from './Decorators';
+import { EmitResult } from './EmitResult';
 import { IAstVisitor } from './IAstVisitor';
 import deasync = require('deasync-promise');
 import { inject, injectable } from 'inversify';
+import TsSimpleAst, { EmitOptions } from "ts-simple-ast";
 import { ITsConfigLoader, TsConfigLoader } from './TsConfigLoader';
-import TsSimpleAst, { EmitOptions, EmitResult } from "ts-simple-ast";
 import { IAstVisitorFinder, AstVisitorFinder } from './AstVisitorFinder';
 
 export let ITsOsCompiler = Symbol(__filename);
@@ -183,19 +184,23 @@ export class TsOsCompiler
             }
         }
 
+        // NOTE: Just discovered there is a difference between the diagnostics
+        // we get from this and the diagnostics we get from the EmitResult.
+        let compilerDiagnostics = this.ast.getDiagnostics();
+
         if (args[0] instanceof Array)
         {
             let results = new Map<string, EmitResult>();
 
             for (let srcFile of args[0])
             {
-                results.set(srcFile, this.ast.getSourceFile(srcFile).emit(args[1]));
+                results.set(srcFile, new EmitResult(this.ast.getSourceFile(srcFile).emit(args[1]), compilerDiagnostics));
             }
 
             return results;
         }
 
-        return this.ast.emit(args[0]);
+        return new EmitResult(this.ast.emit(args[0]), compilerDiagnostics);
     }
 
     public EmitSync(emitOptions?: EmitOptions): EmitResult;
