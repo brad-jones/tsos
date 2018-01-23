@@ -9,7 +9,7 @@
     "types": "./dist/index.d.ts",
     "scripts": {
         "clean": "shx rm -rf ./dist && shx rm -rf ./.nyc_output",
-        "build": "tsc -p tsconfig.build.json && shx cp -R ./dist/tsos-visitors/**/* ./dist && shx rm -rf ./dist/tsos-*",
+        "build": "tsc -p tsconfig.build.json && shx cp -R ./dist/tsos-visitors/**/* ./dist && shx rm -rf ./dist/tsos-* && node ../../scripts/fixSourceMapPaths.js ./dist",
         "test": "../tsos-cli/dist/index.js runner ./tests/runner.ts --no-visitors",
         "cover": "nyc --exclude \"tests/**\" --report-dir ../../test-results/tsos-visitors/coverage --reporter=html --reporter=clover yarn test",
         "upgrade-packages": "ncu --upgrade --upgradeAll --packageFile ./package.json --filter '/^(?!@brad-jones).*$/'"
