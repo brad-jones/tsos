@@ -11,7 +11,7 @@
     "scripts": {
         "clean": "shx rm -rf ./dist && shx rm -rf ./.nyc_output",
         "build": "tsc -p tsconfig.build.json && shx cp -R ./dist/tsos-cli/**/* ./dist && shx rm -rf ./dist/tsos-* && shx chmod +x ./dist/index.js && node ../../scripts/fixSourceMapPaths.js ./dist",
-        "test": "./dist/index.js runner ./tests/runner.ts --no-visitors",
+        "test": "./dist/index.js run ./tests/runner.ts --no-visitors",
         "cover": "nyc --exclude \"tests/**\" --report-dir ../../test-results/tsos-cli/coverage --reporter=html --reporter=clover yarn test",
         "upgrade-packages": "ncu --upgrade --upgradeAll --packageFile ./package.json --filter '/^(?!@brad-jones).*$/'"
     },
