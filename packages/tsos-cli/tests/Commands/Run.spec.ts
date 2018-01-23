@@ -6,7 +6,7 @@ import { Expect, Test, AsyncTest, SpyOn, Any, TeardownFixture, Timeout } from "a
 export class TsOsCliRunCmdFixture
 {
     @AsyncTest()
-    @Timeout(5000)
+    @Timeout(30000)
     public async RunHelloWorld()
     {
         let result = await execa(`${__dirname}/../../dist/index.js`, ['run', `${__dirname}/../ScriptsToRun/HelloWorld.ts`], { reject: false });

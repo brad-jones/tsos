@@ -7,7 +7,7 @@ import { Expect, Test, AsyncTest, SpyOn, Any, TeardownFixture, Timeout } from "a
 export class TsOsCliBuildCmdFixture
 {
     @AsyncTest()
-    @Timeout(5000)
+    @Timeout(30000)
     public async BuildGoodProject()
     {
         let projectPath = `${__dirname}/../ProjectsToBuild/GoodProject`;
@@ -32,7 +32,7 @@ export class TsOsCliBuildCmdFixture
     }
 
     @AsyncTest()
-    @Timeout(5000)
+    @Timeout(30000)
     public async BuildBadProject()
     {
         let projectPath = `${__dirname}/../ProjectsToBuild/BadProject`;
@@ -54,7 +54,7 @@ export class TsOsCliBuildCmdFixture
     }
 
     @AsyncTest()
-    @Timeout(5000)
+    @Timeout(30000)
     public async BuildWithTsOptions()
     {
         let projectPath = `${__dirname}/../ProjectsToBuild/BadProject`;
@@ -82,7 +82,7 @@ export class TsOsCliBuildCmdFixture
     }
 
     @AsyncTest()
-    @Timeout(10000)
+    @Timeout(30000)
     public async BuildWithAstVisitors()
     {
         let projectPath = `${__dirname}/../ProjectsToBuild/GoodProject`;

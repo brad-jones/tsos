@@ -279,7 +279,7 @@ export class TsOsCompilerFixture
     }
 
     @AsyncTest()
-    @Timeout(5000)
+    @Timeout(30000)
     public async EmitAll()
     {
         let compiler = new TsOsCompiler();
@@ -292,7 +292,7 @@ export class TsOsCompilerFixture
     }
 
     @AsyncTest()
-    @Timeout(5000)
+    @Timeout(30000)
     public async EmitWithDiagnostics()
     {
         let compiler = new TsOsCompiler();
@@ -305,7 +305,7 @@ export class TsOsCompilerFixture
     }
 
     @AsyncTest()
-    @Timeout(5000)
+    @Timeout(30000)
     public async EmitSingleSourceFile()
     {
         let compiler = new TsOsCompiler();
@@ -319,7 +319,7 @@ export class TsOsCompilerFixture
     }
 
     @AsyncTest()
-    @Timeout(5000)
+    @Timeout(30000)
     public async EmitManySourceFiles()
     {
         let files = ['tsos-compiler/src/TsOsCompiler.ts', 'tsos-compiler/src/AstVisitorFinder.ts'];
@@ -337,7 +337,7 @@ export class TsOsCompilerFixture
     }
 
     @AsyncTest()
-    @Timeout(5000)
+    @Timeout(30000)
     public async EmitOnlyDtsFiles()
     {
         let compiler = new TsOsCompiler();
