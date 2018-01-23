@@ -182,7 +182,7 @@ new Listr
                     {
                         return {
                             title: package,
-                            task: () => delay(5000).then(_ =>
+                            task: () => delay(10000).then(_ =>
                                 execa.stdout('npm', ['pack', `@brad-jones/${package}@${ctx.nextVersion}`]).then(result =>
                                     ctx.uploads.push(lodash.trim(result))
                                 )
