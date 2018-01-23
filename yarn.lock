@@ -5472,9 +5472,9 @@ trim@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/trim/-/trim-0.0.1.tgz#5858547f6b290757ee95cccc666fb50084c460dd"
 
-ts-simple-ast@^6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/ts-simple-ast/-/ts-simple-ast-6.3.0.tgz#f6198523089abd6a282a1520eb54c45d698f91d1"
+ts-simple-ast@^6.4.0:
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/ts-simple-ast/-/ts-simple-ast-6.4.0.tgz#0768e24dff8736eddce421cec8308ed1e7f29164"
   dependencies:
     code-block-writer "^6.2.0"
     globby "^6.1.0"
