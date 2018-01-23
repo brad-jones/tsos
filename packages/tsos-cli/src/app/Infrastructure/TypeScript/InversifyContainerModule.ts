@@ -1,6 +1,7 @@
 import { ContainerModule, interfaces } from 'inversify';
 import { INodeHook, NodeHook } from 'app/Infrastructure/TypeScript/NodeHook';
 import { ICommandLineParser, CommandLineParser } from 'app/Infrastructure/TypeScript/CommandLineParser';
+import { IDiagnosticFormatter, DiagnosticFormatter } from 'app/Infrastructure/TypeScript/DiagnosticFormatter';
 import { ITsConfigLoader, TsConfigLoader, ITsOsCompiler, TsOsCompiler, IAstVisitorFinder, AstVisitorFinder } from '@brad-jones/tsos-compiler';
 
 export default new ContainerModule
@@ -14,5 +15,6 @@ export default new ContainerModule
         bind<ITsConfigLoader>(ITsConfigLoader).to(TsConfigLoader);
         bind<IAstVisitorFinder>(IAstVisitorFinder).to(AstVisitorFinder);
         bind<ICommandLineParser>(ICommandLineParser).to(CommandLineParser);
+        bind<IDiagnosticFormatter>(IDiagnosticFormatter).to(DiagnosticFormatter);
     }
 );

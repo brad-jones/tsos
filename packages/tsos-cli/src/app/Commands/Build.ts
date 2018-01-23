@@ -7,6 +7,7 @@ import { ILogger } from 'app/Infrastructure/Logging/ILogger';
 import { ICaporalConfig } from 'app/Infrastructure/ICaporalConfig';
 import { INodeHook } from 'app/Infrastructure/TypeScript/NodeHook';
 import { ICommandLineParser } from 'app/Infrastructure/TypeScript/CommandLineParser';
+import { IDiagnosticFormatter } from 'app/Infrastructure/TypeScript/DiagnosticFormatter';
 
 export interface ICmdArguments
 {
@@ -26,7 +27,8 @@ export default class Build implements ICommand
     (
         @inject(INodeHook) private nodeHook: INodeHook,
         @inject(ITsOsCompiler) private tsOsCompiler: ITsOsCompiler,
-        @inject(ICommandLineParser) private tsCliParser: ICommandLineParser
+        @inject(ICommandLineParser) private tsCliParser: ICommandLineParser,
+        @inject(IDiagnosticFormatter) private diagnosticFormatter: IDiagnosticFormatter
     ){}
 
     public Description: string = "Compiles TypeScript using TsSimpleAst and Ast Visitor Modules.";
@@ -72,7 +74,7 @@ export default class Build implements ICommand
         let diag = result.getDiagnostics();
         if (diag.length > 0)
         {
-            console.error(diag);
+            console.error(this.diagnosticFormatter.FormatDiagnostics(diag));
             throw new Error('TypeScript contains errors!');
         }
     }

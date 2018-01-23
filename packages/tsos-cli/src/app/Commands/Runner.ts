@@ -1,11 +1,13 @@
 import * as path from 'path';
 import * as caporal from 'caporal';
+import { Diagnostic } from 'ts-simple-ast';
 import { inject, injectable } from 'inversify';
 import { ICommand } from 'app/Commands/ICommand';
 import { getErrorSource } from 'source-map-support';
 import { ILogger } from 'app/Infrastructure/Logging/ILogger';
 import { ICaporalConfig } from 'app/Infrastructure/ICaporalConfig';
 import { INodeHook } from 'app/Infrastructure/TypeScript/NodeHook';
+import { IDiagnosticFormatter } from 'app/Infrastructure/TypeScript/DiagnosticFormatter';
 
 export interface ICmdArguments
 {
@@ -26,7 +28,8 @@ export default class Runner implements ICommand
 {
     public constructor
     (
-        @inject(INodeHook) private nodeHook: INodeHook
+        @inject(INodeHook) private nodeHook: INodeHook,
+        @inject(IDiagnosticFormatter) private diagnosticFormatter: IDiagnosticFormatter
     ){}
 
     public Description: string = "This command is executed by the `Run` command as a child process.";
@@ -91,8 +94,18 @@ export default class Runner implements ICommand
         }
         catch (e)
         {
-            console.log(getErrorSource(e));
-            console.error(e);
+            let mappedError = getErrorSource(e);
+            if (mappedError) console.error(mappedError);
+
+            if (Array.isArray(e) && e[0] instanceof Diagnostic)
+            {
+                console.error(this.diagnosticFormatter.FormatDiagnostics(e));
+            }
+            else
+            {
+                console.error(e);
+            }
+
             process.exit(1);
         }
     }
