@@ -1,0 +1,4 @@
+klass FooBar
+{
+
+}

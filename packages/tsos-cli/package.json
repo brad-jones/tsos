@@ -11,8 +11,8 @@
     "scripts": {
         "clean": "shx rm -rf ./dist && shx rm -rf ./.nyc_output",
         "build": "tsc -p tsconfig.build.json && shx cp -R ./dist/tsos-cli/**/* ./dist && shx rm -rf ./dist/tsos-* && shx chmod +x ./dist/index.js",
-        "test": "echo 'Tests Coming Soon :)'",
-        "cover": "echo 'Tests Coming Soon :)'",
+        "test": "./dist/index.js runner ./tests/runner.ts --no-visitors",
+        "cover": "nyc --exclude \"tests/**\" --report-dir ../../test-results/tsos-cli/coverage --reporter=html --reporter=clover yarn test",
         "upgrade-packages": "ncu --upgrade --upgradeAll --packageFile ./package.json --filter '/^(?!@brad-jones).*$/'"
     },
     "dependencies": {
@@ -34,12 +34,14 @@
         "typescript": "^2.6.2"
     },
     "devDependencies": {
+        "@types/execa": "^0.8.1",
         "@types/fs-extra": "^5.0.0",
         "@types/node": "^9.3.0",
         "@types/shelljs": "^0.7.7",
         "@types/source-map-support": "^0.4.0",
         "@types/xxhashjs": "^0.1.1",
         "alsatian": "^2.0.0",
+        "execa": "^0.9.0",
         "npm-check-updates": "^2.14.0",
         "nyc": "^11.4.1",
         "shx": "^0.2.2",
