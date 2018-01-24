@@ -9,4 +9,5 @@ export interface ICaporalConfig
     command(synospis: string, description: string): ICaporalConfig;
     option(synopsis: string, description: string, validator?: ValidatorArg, defaultValue?: any, required?: boolean): ICaporalConfig;
     alias(alias: string): ICaporalConfig;
+    strict(value: boolean): ICaporalConfig;
 }

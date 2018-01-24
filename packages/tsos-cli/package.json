@@ -17,7 +17,7 @@
     },
     "dependencies": {
         "@brad-jones/tsos-compiler": "0.0.0-semantically-released",
-        "caporal": "cazgp/Caporal.js#8f353d593fe592c9fea51b4e565f1b3d747777a2",
+        "caporal": "brad-jones/Caporal.js#8a18c780551b18a49782c333995f4b8d4c37ceac",
         "chalk": "^2.3.0",
         "change-case": "^3.0.1",
         "fs-extra": "^5.0.0",

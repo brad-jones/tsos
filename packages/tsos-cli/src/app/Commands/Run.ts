@@ -18,7 +18,6 @@ export interface ICmdOptions
 {
     noCache: boolean;
     tsOptions: string[];
-    scriptOptions: string[];
     astVisitors: string[];
     noVisitors: boolean;
 }
@@ -39,9 +38,9 @@ export default class Run implements ICommand
         config.argument('script', 'The TypeScript file to run.', caporal.STRING);
         config.option('--no-cache', 'If set transpilation cache will be disabled.', caporal.BOOLEAN, false);
         config.option('--ts-options', 'A csv list of arguments / options that are accepted by tsc.', caporal.LIST, [], false);
-        config.option('--script-options', 'A csv list of arguments / options that are accepted by the script being run.', caporal.LIST, [], false);
         config.option('--ast-visitors', 'A csv list of file globs where we might find some visitor modules.', caporal.LIST, [], false);
         config.option('--no-visitors', 'If set, no auto discovered visitors will be applied.', caporal.BOOLEAN, false);
+        config.strict(false);
     }
 
     public async OnExecute(args: ICmdArguments, options: ICmdOptions, logger: ILogger)
@@ -52,39 +51,6 @@ export default class Run implements ICommand
 
         // This is what makes typescript files get compiled on the fly.
         this.nodeHook.Register(options.tsOptions, options.noVisitors || normalisedVisitors, !options.noCache);
-
-        // Add the script options into argv
-        if (options.scriptOptions)
-        {
-            process.argv.splice(process.argv.findIndex(_ => _ === '--script-options'), 2);
-
-            for (let scriptOption of options.scriptOptions)
-            {
-                let segments = scriptOption.split('=');
-                if (segments.length > 1)
-                {
-                    if (segments[0].length === 1)
-                    {
-                        process.argv.push(`-${segments[0]} ${segments[1]}`);
-                    }
-                    else
-                    {
-                        process.argv.push(`--${segments[0]} ${segments[1]}`);
-                    }
-                }
-                else
-                {
-                    if (scriptOption.length === 1)
-                    {
-                        process.argv.push(`-${scriptOption}`);
-                    }
-                    else
-                    {
-                        process.argv.push(`--${scriptOption}`);
-                    }
-                }
-            }
-        }
 
         // Exceptions get swallowed if we do not wrap the require here.
         try
