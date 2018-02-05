@@ -24,20 +24,20 @@
         "inversify": "^4.10.0",
         "node-hook": "^1.0.0",
         "reflect-metadata": "^0.1.12",
-        "replace-in-file": "^3.1.0",
+        "replace-in-file": "^3.1.1",
         "require-glob": "^3.2.0",
         "source-map-support": "^0.5.3",
         "tslib": "^1.9.0",
         "xxhashjs": "^0.2.2"
     },
     "peerDependencies": {
-        "typescript": "^2.6.2"
+        "typescript": "^2.7.1"
     },
     "devDependencies": {
         "@types/execa": "^0.8.1",
         "@types/fs-extra": "^5.0.0",
         "@types/node": "^9.4.0",
-        "@types/shelljs": "^0.7.7",
+        "@types/shelljs": "^0.7.8",
         "@types/source-map-support": "^0.4.0",
         "@types/xxhashjs": "^0.1.1",
         "alsatian": "^2.1.0",
@@ -46,7 +46,7 @@
         "nyc": "^11.4.1",
         "shx": "^0.2.2",
         "tap-xunit": "^2.2.0",
-        "typescript": "^2.6.2"
+        "typescript": "^2.7.1"
     },
     "publishConfig": {
         "access": "public"
