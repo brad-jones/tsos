@@ -36,7 +36,7 @@
     "devDependencies": {
         "@types/execa": "^0.8.1",
         "@types/fs-extra": "^5.0.0",
-        "@types/node": "^9.4.0",
+        "@types/node": "^9.4.1",
         "@types/shelljs": "^0.7.8",
         "@types/source-map-support": "^0.4.0",
         "@types/xxhashjs": "^0.1.1",
