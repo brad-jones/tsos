@@ -20,16 +20,16 @@
         "lodash": "^4.17.5",
         "mz": "^2.7.0",
         "require-glob": "^3.2.0",
-        "ts-simple-ast": "^6.9.0",
+        "ts-simple-ast": "^6.10.0",
         "tslib": "^1.9.0"
     },
     "peerDependencies": {
         "typescript": "^2.7.1"
     },
     "devDependencies": {
-        "@types/lodash": "^4.14.101",
+        "@types/lodash": "^4.14.102",
         "@types/mz": "^0.0.32",
-        "@types/node": "^9.4.1",
+        "@types/node": "^9.4.2",
         "alsatian": "^2.1.0",
         "npm-check-updates": "^2.14.0",
         "nyc": "^11.4.1",
