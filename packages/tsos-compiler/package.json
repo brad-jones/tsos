@@ -30,7 +30,7 @@
         "@types/lodash": "^4.14.102",
         "@types/mz": "^0.0.32",
         "@types/node": "^9.4.2",
-        "alsatian": "^2.1.0",
+        "alsatian": "^2.2.1",
         "npm-check-updates": "^2.14.0",
         "nyc": "^11.4.1",
         "shx": "^0.2.2",
