@@ -40,7 +40,7 @@
         "@types/shelljs": "^0.7.8",
         "@types/source-map-support": "^0.4.0",
         "@types/xxhashjs": "^0.1.1",
-        "alsatian": "^2.1.0",
+        "alsatian": "^2.2.1",
         "execa": "^0.9.0",
         "npm-check-updates": "^2.14.0",
         "nyc": "^11.4.1",
