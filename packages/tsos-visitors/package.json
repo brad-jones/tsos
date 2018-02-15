@@ -16,7 +16,7 @@
     },
     "dependencies": {
         "@brad-jones/tsos-compiler": "0.0.0-semantically-released",
-        "ts-simple-ast": "^6.11.1",
+        "ts-simple-ast": "^7.0.1",
         "tslib": "^1.9.0"
     },
     "peerDependencies": {
@@ -24,7 +24,7 @@
     },
     "devDependencies": {
         "@types/mz": "^0.0.32",
-        "@types/node": "^9.4.4",
+        "@types/node": "^9.4.6",
         "@types/shelljs": "^0.7.8",
         "alsatian": "^2.2.1",
         "npm-check-updates": "^2.14.0",
