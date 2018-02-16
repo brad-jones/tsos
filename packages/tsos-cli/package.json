@@ -31,7 +31,7 @@
         "xxhashjs": "^0.2.2"
     },
     "peerDependencies": {
-        "typescript": "^2.7.1"
+        "typescript": "^2.7.2"
     },
     "devDependencies": {
         "@types/execa": "^0.8.1",
@@ -46,7 +46,7 @@
         "nyc": "^11.4.1",
         "shx": "^0.2.2",
         "tap-xunit": "^2.2.0",
-        "typescript": "^2.7.1"
+        "typescript": "^2.7.2"
     },
     "publishConfig": {
         "access": "public"

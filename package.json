@@ -31,16 +31,16 @@
         "listr": "^0.13.0",
         "lodash": "^4.17.5",
         "mz": "^2.7.0",
-        "nodemon": "^1.14.12",
+        "nodemon": "^1.15.0",
         "npm-check-updates": "^2.14.0",
         "octonode": "^0.9.1",
         "semver": "^5.5.0",
         "shx": "^0.2.2",
-        "typescript": "^2.7.1",
+        "typescript": "^2.7.2",
         "yargs": "^11.0.0"
     },
     "resolutions":
     {
-        "typescript": "^2.7.1"
+        "typescript": "^2.7.2"
     }
 }
