@@ -5,7 +5,7 @@ import { EmitResult } from './EmitResult';
 import { IAstVisitor } from './IAstVisitor';
 import deasync = require('deasync-promise');
 import { inject, injectable } from 'inversify';
-import TsSimpleAst, { EmitOptions } from "ts-simple-ast";
+import TsSimpleAst, { EmitOptions, CompilerOptions } from "ts-simple-ast";
 import { ITsConfigLoader, TsConfigLoader } from './TsConfigLoader';
 import { IAstVisitorFinder, AstVisitorFinder } from './AstVisitorFinder';
 
@@ -97,7 +97,15 @@ export class TsOsCompiler
             }
 
             // Create the new ast
-            this.ast = new TsSimpleAst({ compilerOptions: compilerOptions, addFilesFromTsConfig: false });
+            this.ast = new TsSimpleAst
+            ({
+                // This fixes a breaking change introduced by:
+                // https://github.com/dsherret/ts-simple-ast/issues/249
+                // Not sure I totally agree with the decision, for now this
+                // type cast fixes the immediate problem.
+                compilerOptions: compilerOptions as any as CompilerOptions,
+                addFilesFromTsConfig: false
+            });
 
             // Automatically add all source files to the ast.
             // Down the track this may not be required.
