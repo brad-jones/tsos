@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as caporal from 'caporal';
+import { Diagnostic } from 'ts-simple-ast';
 import { inject, injectable } from 'inversify';
 import { ICommand } from 'app/Commands/ICommand';
 import { ITsOsCompiler } from '@brad-jones/tsos-compiler';
@@ -58,13 +59,32 @@ export default class Build implements ICommand
 
         // Load up visitors provided by command line or
         // any discovered visitors from tsconfig.
-        if (normalisedVisitors.length > 0)
+        try
         {
-            await this.tsOsCompiler.AddAstVisitors(normalisedVisitors);
+            if (normalisedVisitors.length > 0)
+            {
+                await this.tsOsCompiler.AddAstVisitors(normalisedVisitors);
+            }
+            else
+            {
+                await this.tsOsCompiler.AddAstVisitors(normalisedProjectPath);
+            }
         }
-        else
+        catch(e)
         {
-            await this.tsOsCompiler.AddAstVisitors(normalisedProjectPath);
+            // If the visitors fail to load, due to syntax errors or typescript
+            // diagnotics in the case the visitors themselves are written in
+            // typescript, we should bail out before attempting to build.
+            if (Array.isArray(e) && e[0] instanceof Diagnostic)
+            {
+                console.error(this.diagnosticFormatter.FormatDiagnostics(e));
+            }
+            else
+            {
+                console.error(e);
+            }
+
+            process.exit(1);
         }
 
         // Run the compilation

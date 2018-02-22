@@ -19,6 +19,7 @@
     "exclude": [
         "./packages/tsos-compiler/tests/TsOsCompiler/EmitWithDiagnostics/**/*.ts",
         "./packages/tsos-cli/tests/ScriptsToRun/**/*.ts",
-        "./packages/tsos-cli/tests/ProjectsToBuild/**/*.ts"
+        "./packages/tsos-cli/tests/ProjectsToBuild/**/*.ts",
+        "./packages/tsos-cli/tests/BadVisitors/**/*.ts"
     ]
 }

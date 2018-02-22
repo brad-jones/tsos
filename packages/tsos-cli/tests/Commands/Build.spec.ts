@@ -109,4 +109,30 @@ export class TsOsCliBuildCmdFixture
         shell.rm('-f', `${projectPath}/*.js`);
         shell.rm('-f', `${projectPath}/*.js.map`);
     }
+
+    @AsyncTest()
+    @Timeout(30000)
+    public async BuildWithBadAstVisitors()
+    {
+        let projectPath = `${__dirname}/../ProjectsToBuild/GoodProject`;
+        let result = await execa
+        (
+            `${__dirname}/../../dist/index.js`,
+            [
+                'build', `${projectPath}/tsconfig.json`,
+                '--ast-visitors', `${__dirname}/../BadVisitors/*.ts`
+            ],
+            { reject: false }
+        );
+        Expect(result.code).not.toBe(0);
+        Expect(result.failed).toBe(true);
+        Expect(result.killed).toBe(false);
+        Expect(result.timedOut).toBe(false);
+        Expect(result.stdout).toBeEmpty();
+        Expect(result.stderr).not.toBeEmpty();
+        Expect(result.stderr).toContain("tests/BadVisitors/bad.ts (3,17): error TS2304: Cannot find name 'IAstVisitor123'.");
+        shell.rm('-f', `${projectPath}/*.d.ts`);
+        shell.rm('-f', `${projectPath}/*.js`);
+        shell.rm('-f', `${projectPath}/*.js.map`);
+    }
 }
