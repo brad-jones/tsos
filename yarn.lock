@@ -1556,6 +1556,10 @@ end-of-stream@^1.0.0:
   dependencies:
     once "^1.4.0"
 
+err-code@^1.0.0:
+  version "1.1.2"
+  resolved "https://nexus-poc.acurus.com.au/repository/npm-group/err-code/-/err-code-1.1.2.tgz#06e0116d3028f6aef4806849eb0ea6a748ae6960"
+
 error-ex@^1.2.0, error-ex@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/error-ex/-/error-ex-1.3.1.tgz#f855a86ce61adc4e8621c3cda21e7a7612c3a8dc"
@@ -4204,6 +4208,13 @@ prettyjson@^1.2.1:
 process-nextick-args@~1.0.6:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-1.0.7.tgz#150e20b756590ad3f91093f25a4f2ad8bff30ba3"
+
+promise-retry@^1.1.1:
+  version "1.1.1"
+  resolved "https://nexus-poc.acurus.com.au/repository/npm-group/promise-retry/-/promise-retry-1.1.1.tgz#6739e968e3051da20ce6497fb2b50f6911df3d6d"
+  dependencies:
+    err-code "^1.0.0"
+    retry "^0.10.0"
 
 "promise@>=3.2 <8":
   version "7.3.1"

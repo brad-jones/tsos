@@ -4,8 +4,7 @@
         "packages/*"
     ],
     "scripts": {
-        "commit": "commit",
-        "commitmsg": "commitlint -e",
+        "commitmsg": "commitlint -e $GIT_PARAMS",
         "clean": "shx rm -rf ./test-results; node ./scripts/workspaceRunner.js clean",
         "build": "node ./scripts/workspaceRunner.js build",
         "rebuild": "yarn clean && yarn build",
@@ -34,13 +33,13 @@
         "nodemon": "^1.15.1",
         "npm-check-updates": "^2.14.0",
         "octonode": "^0.9.1",
+        "promise-retry": "^1.1.1",
         "semver": "^5.5.0",
         "shx": "^0.2.2",
         "typescript": "^2.7.2",
         "yargs": "^11.0.0"
     },
-    "resolutions":
-    {
+    "resolutions": {
         "typescript": "^2.7.2"
     }
 }

@@ -1,13 +1,14 @@
 const os = require('os');
 const fs = require('mz/fs');
 const path = require('path');
-const execa = require('execa');
 const Listr = require('listr');
 const delay = require('delay');
-const lodash = require('lodash');
+const execa = require('execa');
 const semver = require('semver');
+const lodash = require('lodash');
 const yargs = require('yargs').argv;
 const getStream = require('get-stream');
+const promiseRetry = require('promise-retry');
 const allPackages = require('./listPackages').listPackages();
 const conventionalChangelog = require('conventional-changelog');
 const conventionalRecommendedBump = require('conventional-recommended-bump');
@@ -182,10 +183,11 @@ new Listr
                     {
                         return {
                             title: package,
-                            task: () => delay(10000).then(_ =>
-                                execa.stdout('npm', ['pack', `@brad-jones/${package}@${ctx.nextVersion}`]).then(result =>
+                            task: () => promiseRetry(retry =>
+                                execa.stdout('npm', ['pack', `@brad-zdfhsdgfh/${package}@${ctx.nextVersion}`]).then(result =>
                                     ctx.uploads.push(lodash.trim(result))
                                 )
+                                .catch(retry)
                             )
                         };
                     }),
