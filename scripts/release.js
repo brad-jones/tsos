@@ -184,7 +184,7 @@ new Listr
                         return {
                             title: package,
                             task: () => promiseRetry(retry =>
-                                execa.stdout('npm', ['pack', `@brad-zdfhsdgfh/${package}@${ctx.nextVersion}`]).then(result =>
+                                execa.stdout('npm', ['pack', `@brad-jones/${package}@${ctx.nextVersion}`]).then(result =>
                                     ctx.uploads.push(lodash.trim(result))
                                 )
                                 .catch(retry)
