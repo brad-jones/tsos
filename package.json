@@ -30,7 +30,7 @@
         "listr": "^0.13.0",
         "lodash": "^4.17.5",
         "mz": "^2.7.0",
-        "nodemon": "^1.15.1",
+        "nodemon": "^1.17.1",
         "npm-check-updates": "^2.14.0",
         "octonode": "^0.9.1",
         "promise-retry": "^1.1.1",
