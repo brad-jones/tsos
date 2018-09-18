@@ -1,10 +1,9 @@
 import { fs } from 'mz';
 import * as shell from 'shelljs';
-import * as ts from 'typescript';
 import { TsOsCompiler } from '@brad-jones/tsos-compiler';
 import { InsertReflectableDecorator } from '@brad-jones/tsos-visitors';
-import { Expect, Test, AsyncTest, Timeout, AsyncSetupFixture, TeardownFixture } from "alsatian";
-import { ModuleKind, ModuleResolutionKind, ScriptTarget } from 'typescript';
+import { Expect, Test, AsyncSetupFixture, TeardownFixture } from "alsatian";
+import { ModuleResolutionKind, ScriptTarget } from 'typescript';
 
 export class InsertReflectableDecoratorFixture
 {

@@ -1,9 +1,9 @@
 import { fs } from 'mz';
 import * as ts from 'typescript';
 import * as shell from 'shelljs';
-import TsSimpleAst, { EmitOptions } from 'ts-simple-ast';
+import TsSimpleAst from 'ts-simple-ast';
 import { TsOsCompiler } from '@brad-jones/tsos-compiler';
-import { Expect, Test, AsyncTest, SpyOn, Any, TeardownFixture, Timeout } from "alsatian";
+import { Expect, Test, AsyncTest, SpyOn, Any, Timeout } from "alsatian";
 
 export class TsOsCompilerFixture
 {
@@ -47,7 +47,7 @@ export class TsOsCompilerFixture
         let options: ts.CompilerOptions = { baseUrl: '.' };
         let compiler = new TsOsCompiler();
         await compiler.ConfigureAst(options);
-        Expect(compiler['ast']['global']['_compilerOptions']['baseUrl']).toBe(options.baseUrl);
+        Expect(compiler['ast']['context']['_compilerOptions']['settings']['baseUrl']).toBe(options.baseUrl);
     }
 
     @Test()
@@ -56,7 +56,7 @@ export class TsOsCompilerFixture
         let options: ts.CompilerOptions = { baseUrl: '.' };
         let compiler = new TsOsCompiler();
         compiler.ConfigureAstSync(options);
-        Expect(compiler['ast']['global']['_compilerOptions']['baseUrl']).toBe(options.baseUrl);
+        Expect(compiler['ast']['context']['_compilerOptions']['settings']['baseUrl']).toBe(options.baseUrl);
     }
 
     @AsyncTest()
@@ -91,7 +91,7 @@ export class TsOsCompilerFixture
         await compiler.ConfigureAst(`${__dirname}/../../../../tsconfig.json`, options);
         Expect(compiler['tsConfigLoader']['LoadConfig']).toHaveBeenCalledWith(`${__dirname}/../../../../tsconfig.json`);
         Expect(compiler.AddSrcFiles).toHaveBeenCalledWith(Any(Array));
-        Expect(compiler['ast']['global']['_compilerOptions']['baseUrl']).toBe(options.baseUrl);
+        Expect(compiler['ast']['context']['_compilerOptions']['settings']['baseUrl']).toBe(options.baseUrl);
     }
 
     @Test()
@@ -104,7 +104,7 @@ export class TsOsCompilerFixture
         compiler.ConfigureAstSync(`${__dirname}/../../../../tsconfig.json`, options);
         Expect(compiler['tsConfigLoader']['LoadConfig']).toHaveBeenCalledWith(`${__dirname}/../../../../tsconfig.json`);
         Expect(compiler.AddSrcFiles).toHaveBeenCalledWith(Any(Array));
-        Expect(compiler['ast']['global']['_compilerOptions']['baseUrl']).toBe(options.baseUrl);
+        Expect(compiler['ast']['context']['_compilerOptions']['settings']['baseUrl']).toBe(options.baseUrl);
     }
 
     @AsyncTest()
@@ -161,7 +161,7 @@ export class TsOsCompilerFixture
         await compiler.ConfigureAst(ts.parseJsonConfigFileContent({}, ts.sys, `${__dirname}/../../../..`), options);
         Expect(compiler['tsConfigLoader']['LoadConfig']).not.toHaveBeenCalled();
         Expect(compiler.AddSrcFiles).toHaveBeenCalledWith(Any(Array));
-        Expect(compiler['ast']['global']['_compilerOptions']['baseUrl']).toBe(options.baseUrl);
+        Expect(compiler['ast']['context']['_compilerOptions']['settings']['baseUrl']).toBe(options.baseUrl);
     }
 
     @Test()
@@ -174,7 +174,7 @@ export class TsOsCompilerFixture
         compiler.ConfigureAstSync(ts.parseJsonConfigFileContent({}, ts.sys, `${__dirname}/../../../..`), options);
         Expect(compiler['tsConfigLoader']['LoadConfig']).not.toHaveBeenCalled();
         Expect(compiler.AddSrcFiles).toHaveBeenCalledWith(Any(Array));
-        Expect(compiler['ast']['global']['_compilerOptions']['baseUrl']).toBe(options.baseUrl);
+        Expect(compiler['ast']['context']['_compilerOptions']['settings']['baseUrl']).toBe(options.baseUrl);
     }
 
     @AsyncTest()

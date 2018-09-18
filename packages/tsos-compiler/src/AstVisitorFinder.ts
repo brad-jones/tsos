@@ -1,4 +1,3 @@
-import * as fs from 'mz/fs';
 import * as path from 'path';
 import * as ts from 'typescript';
 import { Implements } from './Decorators';

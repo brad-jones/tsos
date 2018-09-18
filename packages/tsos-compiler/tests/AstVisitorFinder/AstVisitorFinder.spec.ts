@@ -1,4 +1,4 @@
-import { Expect, Test, AsyncTest, Timeout } from "alsatian";
+import { Expect, Test, AsyncTest } from "alsatian";
 import { AstVisitorFinder } from '@brad-jones/tsos-compiler';
 
 export class AstVisitorFinderFixture

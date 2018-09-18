@@ -194,7 +194,7 @@ export class TsOsCompiler
 
         // NOTE: Just discovered there is a difference between the diagnostics
         // we get from this and the diagnostics we get from the EmitResult.
-        let compilerDiagnostics = this.ast.getDiagnostics();
+        let compilerDiagnostics = this.ast.getPreEmitDiagnostics();
 
         if (args[0] instanceof Array)
         {
@@ -202,7 +202,7 @@ export class TsOsCompiler
 
             for (let srcFile of args[0])
             {
-                results.set(srcFile, new EmitResult(this.ast.getSourceFile(srcFile).emit(args[1]), compilerDiagnostics));
+                results.set(srcFile, new EmitResult(this.ast.getSourceFile(_ => _.getFilePath().endsWith(srcFile)).emit(args[1]), compilerDiagnostics));
             }
 
             return results;

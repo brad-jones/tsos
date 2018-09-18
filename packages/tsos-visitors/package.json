@@ -16,24 +16,24 @@
     },
     "dependencies": {
         "@brad-jones/tsos-compiler": "0.0.0-semantically-released",
-        "ts-simple-ast": "^8.1.0",
-        "tslib": "^1.9.0"
+        "ts-simple-ast": "^14.4.5",
+        "tslib": "^1.9.3"
     },
     "peerDependencies": {
-        "typescript": "^2.7.2"
+        "typescript": "^3.0.3"
     },
     "devDependencies": {
         "@types/mz": "^0.0.32",
-        "@types/node": "^9.4.6",
-        "@types/shelljs": "^0.7.8",
-        "alsatian": "^2.2.1",
-        "npm-check-updates": "^2.14.0",
+        "@types/node": "^10.10.1",
+        "@types/shelljs": "^0.8.0",
+        "alsatian": "^2.3.0",
+        "npm-check-updates": "^2.14.2",
         "mz": "^2.7.0",
-        "nyc": "^11.4.1",
-        "shx": "^0.2.2",
-        "tap-spec": "^4.1.1",
-        "tap-xunit": "^2.2.0",
-        "typescript": "^2.7.2"
+        "nyc": "^13.0.1",
+        "shx": "^0.3.2",
+        "tap-spec": "^5.0.0",
+        "tap-xunit": "^2.3.0",
+        "typescript": "^3.0.3"
     },
     "publishConfig": {
         "access": "public"

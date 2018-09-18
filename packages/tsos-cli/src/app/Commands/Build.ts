@@ -73,7 +73,7 @@ export default class Build implements ICommand
         catch(e)
         {
             // If the visitors fail to load, due to syntax errors or typescript
-            // diagnotics in the case the visitors themselves are written in
+            // diagnostics in the case the visitors themselves are written in
             // typescript, we should bail out before attempting to build.
             if (Array.isArray(e) && e[0] instanceof Diagnostic)
             {
