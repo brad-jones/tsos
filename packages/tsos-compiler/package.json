@@ -20,7 +20,7 @@
         "lodash": "^4.17.11",
         "mz": "^2.7.0",
         "require-glob": "^3.2.0",
-        "ts-simple-ast": "^14.4.5",
+        "ts-simple-ast": "^15.0.1",
         "tslib": "^1.9.3"
     },
     "peerDependencies": {
@@ -29,7 +29,7 @@
     "devDependencies": {
         "@types/lodash": "^4.14.116",
         "@types/mz": "^0.0.32",
-        "@types/node": "^10.10.2",
+        "@types/node": "^10.10.3",
         "alsatian": "^2.3.0",
         "npm-check-updates": "^2.14.2",
         "nyc": "^13.0.1",
