@@ -16,7 +16,7 @@
     },
     "dependencies": {
         "@brad-jones/tsos-compiler": "0.0.0-semantically-released",
-        "ts-simple-ast": "^15.0.1",
+        "ts-simple-ast": "^15.0.2",
         "tslib": "^1.9.3"
     },
     "peerDependencies": {
