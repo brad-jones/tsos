@@ -308,9 +308,9 @@
   version "10.10.1"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.10.1.tgz#d5c96ca246a418404914d180b7fdd625ad18eca6"
 
-"@types/node@^10.10.3":
-  version "10.10.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.10.3.tgz#09c75a4ad84d6a3d286790bdd9489a4f8ee9906c"
+"@types/node@^10.11.0":
+  version "10.11.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.11.0.tgz#ddd0d67a3b6c3810dd1a59e36675fa82de5e19ae"
 
 "@types/shelljs@^0.8.0":
   version "0.8.0"
@@ -5198,9 +5198,9 @@ trim@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/trim/-/trim-0.0.1.tgz#5858547f6b290757ee95cccc666fb50084c460dd"
 
-ts-simple-ast@^15.0.2:
-  version "15.0.2"
-  resolved "https://registry.yarnpkg.com/ts-simple-ast/-/ts-simple-ast-15.0.2.tgz#703de08cc62eb3962bd7fffcd833533ebe38f22c"
+ts-simple-ast@^15.1.0:
+  version "15.1.0"
+  resolved "https://registry.yarnpkg.com/ts-simple-ast/-/ts-simple-ast-15.1.0.tgz#fb361bfadfd85cd9968435403acc8d6f1f79fce9"
   dependencies:
     "@dsherret/to-absolute-glob" "^2.0.2"
     code-block-writer "^7.2.1"
