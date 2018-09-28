@@ -20,11 +20,11 @@
         "tslib": "^1.9.3"
     },
     "peerDependencies": {
-        "typescript": "^3.0.3"
+        "typescript": "^3.1.1"
     },
     "devDependencies": {
         "@types/mz": "^0.0.32",
-        "@types/node": "^10.11.0",
+        "@types/node": "^10.11.2",
         "@types/shelljs": "^0.8.0",
         "alsatian": "^2.3.0",
         "npm-check-updates": "^2.14.2",
@@ -33,7 +33,7 @@
         "shx": "^0.3.2",
         "tap-spec": "^5.0.0",
         "tap-xunit": "^2.3.0",
-        "typescript": "^3.0.3"
+        "typescript": "^3.1.1"
     },
     "publishConfig": {
         "access": "public"
